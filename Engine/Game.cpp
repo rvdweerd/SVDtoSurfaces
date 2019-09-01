@@ -24,8 +24,15 @@
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
-	gfx( wnd )
+	gfx( wnd ),
+	surface(3,5)
 {
+	surface.PutPixel(0, 0, Colors::Red);
+	surface.PutPixel(0, 1, Colors::Red);
+	surface.PutPixel(1, 2, Colors::Red);
+	surface.PutPixel(2, 2, Colors::Red);
+	surface.PutPixel(2, 3, Colors::Red);
+	surface.PutPixel(2, 4, Colors::Red);
 }
 
 void Game::Go()
@@ -42,4 +49,6 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
+	//surface.Draw(101, 10, gfx);
+	gfx.DrawSprite(200, 10, surface);
 }
