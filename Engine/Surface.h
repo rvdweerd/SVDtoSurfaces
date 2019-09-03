@@ -1,11 +1,12 @@
 #pragma once
 #include "Colors.h"
-//#include "Graphics.h"
+#include <string>
 
 class Surface
 {
 public:
 	Surface(int width, int height);
+	Surface(const std::string& fileName);
 	Surface(const Surface&);
 	~Surface();
 	const Surface& operator=(const Surface&);
