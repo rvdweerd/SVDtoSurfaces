@@ -59,7 +59,10 @@ Surface::Surface(const std::string& fileName)
 					PutPixel(x, y , Color(r, g, b));
 				}
 			}
-			file.seekg(padding, std::ios_base::cur);
+			if (bmInfoHeader.biBitCount == 24)
+			{
+				file.seekg(padding, std::ios_base::cur);
+			}
 		}
 	}
 }

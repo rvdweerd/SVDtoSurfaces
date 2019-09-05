@@ -332,10 +332,22 @@ void Graphics::DrawSprite(int x, int y, Surface& s)
 			PutPixel(x + sx, y + sy, s.GetPixel(sx, sy));
 		}
 	}
+}
 
-
-
-
+void Graphics::DrawSprite(int x, int y, Surface& s, RectI srcRect)
+{
+	//assert(srcRect.right <= s.GetWidth());
+	//assert(srcRect.left >= 0);
+	//assert(srcRect.bottom <= s.GetHeight());
+	//assert(srcRect.top >= 0);
+	  
+	for (int sx = std::max(srcRect.left-x,srcRect.left); sx < std::min(ScreenWidth-x, srcRect.right); sx++)
+	{
+		for (int sy = std::max(srcRect.top-y,srcRect.top); sy < std::min(ScreenHeight-y,srcRect.bottom); sy++)
+		{
+			PutPixel(  x+sx, y+sy ,  s.GetPixel(sx, sy) );
+		}
+	}
 }
 
 
