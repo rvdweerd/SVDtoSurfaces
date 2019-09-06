@@ -121,20 +121,19 @@ Color Surface::GetPixel(int x, int y) const
 	return pPixels[x+y*width];
 }
 
-int Surface::GetWidth()
+int Surface::GetWidth() const
 {
 	return width;
 }
 
-int Surface::GetHeight()
+int Surface::GetHeight() const
 {
 	return height;
 }
 
-/*void Surface::Draw(int x, int y, Graphics &gfx) const
+RectI Surface::GetRect() const
 {
-	for (int i = 0; i < width * height; i++)
-	{
-		gfx.PutPixel(x + i % width, y + i / width, pPixels[i]);
-	}
-}*/
+	return { {0,0},width, height};
+}
+
+
