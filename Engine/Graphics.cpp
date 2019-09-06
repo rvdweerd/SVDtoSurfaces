@@ -390,12 +390,12 @@ void Graphics::DrawSpriteNonChroma(int x, int y, RectI srcRect, const RectI& cli
 	}
 }
 
-void Graphics::DrawSprite(int x, int y, const Surface& s, Color chroma = Colors::Magenta)
+void Graphics::DrawSprite(int x, int y, const Surface& s, Color chroma )
 {
 	DrawSprite(x, y, s.GetRect(), s, chroma);
 }
 
-void Graphics::DrawSprite(int x, int y, RectI srcRect, const Surface& s, Color chroma = Colors::Magenta)
+void Graphics::DrawSprite(int x, int y, RectI srcRect, const Surface& s, Color chroma )
 {
 	DrawSprite(x, y, srcRect, GetScreenRect(), s, chroma);
 }

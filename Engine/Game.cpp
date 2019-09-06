@@ -43,11 +43,9 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
-	//gfx.DrawSprite(wnd.mouse.GetPosX(), wnd.mouse.GetPosY() , { {360,270},90,90 }, { {200,200}, 100,100 },  surf);
-	//gfx.DrawRect({ {200,200}, 100,100 }, Colors::Red);
-	//gfx.DrawSprite(wnd.mouse.GetPosX(), wnd.mouse.GetPosY(), { {360,270},90,90 } , gfx.GetScreenRect(), surf);
+	gfx.DrawSprite(10, 10, surf);
 	
-	gfx.DrawSprite(wnd.mouse.GetPosX(), wnd.mouse.GetPosY(), { {90,90},90,90 }, Graphics::GetScreenRect(), surf);// , Colors::Magenta);
+	//gfx.DrawSprite(wnd.mouse.GetPosX(), wnd.mouse.GetPosY(), { {90,90},90,90 }, Graphics::GetScreenRect(), surf);// , Colors::Magenta);
 }
 
 
