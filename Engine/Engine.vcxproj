@@ -141,6 +141,7 @@
     <ClInclude Include="Colors.h" />
     <ClInclude Include="COMInitializer.h" />
     <ClInclude Include="DXErr.h" />
+    <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Keyboard.h" />
@@ -151,11 +152,14 @@
     <ClInclude Include="Sound.h" />
     <ClInclude Include="SoundEffect.h" />
     <ClInclude Include="Surface.h" />
+    <ClInclude Include="Vec2.h" />
     <ClInclude Include="Vei2.h" />
+    <ClInclude Include="Willy.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="COMInitializer.cpp" />
     <ClCompile Include="DXErr.cpp" />
+    <ClCompile Include="FrameTimer.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Keyboard.cpp" />
@@ -165,7 +169,9 @@
     <ClCompile Include="RectI.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Surface.cpp" />
+    <ClCompile Include="Vec2.cpp" />
     <ClCompile Include="Vei2.cpp" />
+    <ClCompile Include="Willy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="FramebufferPS.hlsl">

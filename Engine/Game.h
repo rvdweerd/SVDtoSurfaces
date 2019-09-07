@@ -24,6 +24,9 @@
 #include "Mouse.h"
 #include "Graphics.h"
 #include "Surface.h"
+#include "FrameTimer.h"
+#include "Vec2.h"
+#include "Willy.h"
 
 class Game
 {
@@ -44,5 +47,9 @@ private:
 	/********************************/
 	/*  User Variables              */
 	Surface surf = Surface("link90x90.bmp");
+	FrameTimer ft;
+	
+	//Vec2 pos = { 0,0 };
+	Willy willy;
 	/********************************/
 };

@@ -39,12 +39,16 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+
 }
 
 void Game::ComposeFrame()
 {
-	gfx.DrawSprite(10, 10, surf);
+	//gfx.DrawSpriteNonChroma(wnd.mouse.GetPosX(), wnd.mouse.GetPosY(), surf);
 	
+	float dt = ft.Mark();
+	willy.pos.x += willy.speed * dt;
+	willy.Draw(gfx, surf,dt);
 	//gfx.DrawSprite(wnd.mouse.GetPosX(), wnd.mouse.GetPosY(), { {90,90},90,90 }, Graphics::GetScreenRect(), surf);// , Colors::Magenta);
 }
 
