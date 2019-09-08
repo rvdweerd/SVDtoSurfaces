@@ -21,12 +21,13 @@
 #include "MainWindow.h"
 #include "Game.h"
 
-Game::Game( MainWindow& wnd )
+Game::Game(MainWindow& wnd)
 	:
-	wnd( wnd ),
-	gfx( wnd ),
+	wnd(wnd),
+	gfx(wnd),
 	surf("link90x90.bmp"),
-	animation(0,0,90,90,5,surf)
+	willy(surf)
+	//animation(90, 0, 90, 90, 4, surf)
 {
 	
 }
@@ -42,12 +43,34 @@ void Game::Go()
 void Game::UpdateModel()
 {
 	float dt = ft.Mark();
-	animation.Update(dt);
+	
+	willy.SetDirection({ 0,0 });
+	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
+	{
+		willy.SetDirection({ 1,0 });
+	}
+	if (wnd.kbd.KeyIsPressed(VK_LEFT))
+	{
+		willy.SetDirection({ -1,0 });
+	}
+	if (wnd.kbd.KeyIsPressed(VK_UP))
+	{
+		willy.SetDirection({ 0,-1 });
+	}
+	if (wnd.kbd.KeyIsPressed(VK_DOWN))
+	{
+		willy.SetDirection({ 0,1 });
+	}
+	willy.Update(dt);
+	//animation.Update(dt);
 }
 
 void Game::ComposeFrame()
 {
-	animation.Draw(gfx);
+	willy.Draw(gfx);
+	//animation.Draw(pos, gfx);
+	//gfx.DrawSprite(0, 0, animation.frames[0], Colors::Magenta);
+	//animation.Draw(gfx);
 }
 
 

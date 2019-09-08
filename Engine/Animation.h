@@ -6,11 +6,11 @@ class Animation
 {
 public:
 	Animation(int x, int y, int width, int height, int nFrames, Surface& surface);
-	void Draw(Graphics& gfx);
+	void Draw(Graphics& gfx) ;
 	void Update(float dt);
 	void Advance();
 
-private:
+public:
 	Surface& sprites;
 	std::vector<Surface> frames;
 	int iCurrentFrame = 0;

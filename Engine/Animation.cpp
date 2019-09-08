@@ -1,4 +1,6 @@
+#pragma once
 #include "Animation.h"
+#include "Vec2.h"
 
 Animation::Animation(int x, int y, int width, int height, int nFrames, Surface& surface)
 	:
@@ -17,10 +19,14 @@ Animation::Animation(int x, int y, int width, int height, int nFrames, Surface& 
 	}
 }
 
-void Animation::Draw(Graphics& gfx)
+
+void Animation::Draw(Graphics& gfx) 
 {
-	gfx.DrawSprite(10, 10, frames[iCurrentFrame]);
+	//Surface s(frames[iCurrentFrame]);
+	gfx.DrawSprite( 0,0, frames[iCurrentFrame] , Colors::Magenta);
+	
 }
+
 
 void Animation::Update(float dt)
 {

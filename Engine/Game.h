@@ -26,7 +26,7 @@
 #include "Surface.h"
 #include "FrameTimer.h"
 #include "Vec2.h"
-#include "Animation.h"
+#include "Character.h"
 
 class Game
 {
@@ -48,8 +48,9 @@ private:
 	/*  User Variables              */
 	Surface surf;
 	FrameTimer ft;
-	Animation animation;
-	//Vec2 pos = { 0,0 };
+	Character willy;
+	//Animation animation;
+	Vec2 pos = { 0,0 };
 	
 	/********************************/
 };
