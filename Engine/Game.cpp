@@ -24,7 +24,9 @@
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
-	gfx( wnd )
+	gfx( wnd ),
+	surf("link90x90.bmp"),
+	animation(0,0,90,90,5,surf)
 {
 	
 }
@@ -39,17 +41,13 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-
+	float dt = ft.Mark();
+	animation.Update(dt);
 }
 
 void Game::ComposeFrame()
 {
-	//gfx.DrawSpriteNonChroma(wnd.mouse.GetPosX(), wnd.mouse.GetPosY(), surf);
-	
-	float dt = ft.Mark();
-	willy.pos.x += willy.speed * dt;
-	willy.Draw(gfx, surf,dt);
-	//gfx.DrawSprite(wnd.mouse.GetPosX(), wnd.mouse.GetPosY(), { {90,90},90,90 }, Graphics::GetScreenRect(), surf);// , Colors::Magenta);
+	animation.Draw(gfx);
 }
 
 

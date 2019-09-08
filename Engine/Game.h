@@ -26,7 +26,7 @@
 #include "Surface.h"
 #include "FrameTimer.h"
 #include "Vec2.h"
-#include "Willy.h"
+#include "Animation.h"
 
 class Game
 {
@@ -46,10 +46,10 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
-	Surface surf = Surface("link90x90.bmp");
+	Surface surf;
 	FrameTimer ft;
-	
+	Animation animation;
 	//Vec2 pos = { 0,0 };
-	Willy willy;
+	
 	/********************************/
 };
