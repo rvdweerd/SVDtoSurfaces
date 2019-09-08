@@ -9,14 +9,14 @@ Character::Character(Surface& surf)
 	spriteSheet(surf)
 {
 	animations.reserve(size_t(Sequence::Count));
-	animations.emplace_back(Animation(90, 0  , 90, 90, 4, 0.15f));
-	animations.emplace_back(Animation(90, 90 , 90, 90, 4, 0.15f));
-	animations.emplace_back(Animation(90, 180, 90, 90, 4, 0.15f));
-	animations.emplace_back(Animation(90, 270, 90, 90, 4, 0.15f));
-	animations.emplace_back(Animation(0,  0  , 90, 90, 1, 0.15f));
-	animations.emplace_back(Animation(0,  90 , 90, 90, 1, 0.15f));
-	animations.emplace_back(Animation(0,  180, 90, 90, 1, 0.15f));
-	animations.emplace_back(Animation(0,  270, 90, 90, 1, 0.15f));
+	for (int i = 0; i < 4; i++)
+	{
+		animations.emplace_back(Animation(90, 90*i , 90, 90, 4, 0.15f, surf));
+	}
+	for (int i = 0; i < 4; i++)
+	{
+		animations.emplace_back(Animation(0, 90*i , 90, 90, 1, 0.15f, surf));
+	}
 }
 
 void Character::SetDirection(Vec2 dir)
@@ -69,6 +69,6 @@ void Character::Update(float dt)
 void Character::Draw(Graphics& gfx)
 {
 	//Vei2 posInt{ (int)pos.x , (int)pos.y };
-	animations[ (int) sequence ].Draw( (Vei2)pos, gfx, spriteSheet);
+	animations[ (int) sequence ].Draw( (Vei2)pos, gfx);
 }
 

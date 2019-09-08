@@ -34,7 +34,7 @@ private:
 	Surface& spriteSheet;
 	std::vector<Animation> animations;
 	Sequence sequence = Sequence::StandForward;
-	float velocity = 160.0f;
+	float velocity = 200.0f;
 	float speedFactor = 1.0f;
 
 };

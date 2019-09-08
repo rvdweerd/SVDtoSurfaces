@@ -8,13 +8,14 @@
 class Animation
 {
 public:
-	Animation(int x, int y, int width, int height, int nFrames, float hTime);
-	void Draw(Vei2 pos, Graphics& gfx, Surface& surface);
+	Animation(int x, int y, int width, int height, int nFrames, float hTime, Surface& spriteSheet_in);
+	void Draw(Vei2 pos, Graphics& gfx) const;
+	void Draw(Vei2 pos, Graphics& gfx,const RectI clip) const;
 	void Update(float dt);
 	void Advance();
 
 public:
-	//Surface& sprites;
+	Surface& spriteSheet;
 	std::vector<RectI> frames;
 	int iCurrentFrame = 0;
 	float holdTime = 0.15f;
