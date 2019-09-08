@@ -66,6 +66,6 @@ void Character::Update(float dt)
 
 void Character::Draw(Graphics& gfx)
 {
-	animations[ (int) sequence ].Draw( gfx,(int)pos.x,(int)pos.y );
+	animations[ (int) sequence ].Draw( gfx, (Vei2) pos );
 }
 

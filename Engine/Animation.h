@@ -6,7 +6,7 @@ class Animation
 {
 public:
 	Animation(int x, int y, int width, int height, int nFrames, Surface& surface);
-	void Draw(Graphics& gfx, int x, int y) ;
+	void Draw(Graphics& gfx, Vei2 pos) ;
 	void Update(float dt);
 	void Advance();
 
@@ -14,7 +14,7 @@ public:
 	Surface& sprites;
 	std::vector<Surface> frames;
 	int iCurrentFrame = 0;
-	float holdTime = 0.2f;
+	float holdTime = 0.15f;
 	float currentFrameTime = 0.0f;
 
 };

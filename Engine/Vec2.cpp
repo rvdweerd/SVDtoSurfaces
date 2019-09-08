@@ -53,6 +53,11 @@ Vec2& Vec2::operator*=(const float k)
 	return *this = *this*k;
 }
 
+Vec2::operator Vei2() const
+{
+	return { int(x), int(y) };
+}
+
 float Vec2::Length() const
 {
 	//return std::sqrt(x*x+y*y);
