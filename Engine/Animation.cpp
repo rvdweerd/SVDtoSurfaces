@@ -20,10 +20,10 @@ Animation::Animation(int x, int y, int width, int height, int nFrames, Surface& 
 }
 
 
-void Animation::Draw(Graphics& gfx) 
+void Animation::Draw(Graphics& gfx, int x, int y) 
 {
 	//Surface s(frames[iCurrentFrame]);
-	gfx.DrawSprite( 0,0, frames[iCurrentFrame] , Colors::Magenta);
+	gfx.DrawSprite(x, y, frames[iCurrentFrame]);// , Colors::Magenta);
 	
 }
 

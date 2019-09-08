@@ -31,7 +31,7 @@ private:
 	Surface& sprites;
 	std::vector<Animation> animations;
 	Sequence sequence = Sequence::StandForward;
-	float velocity = 60.0f;
+	float velocity = 160.0f;
 
 
 };

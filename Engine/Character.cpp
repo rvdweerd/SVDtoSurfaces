@@ -2,8 +2,8 @@
 
 Character::Character(Surface& surf)
 	:
-	pos({10.0f,10.0f}),
-	vel({1.0f,0}),
+	pos({10,10}),
+	vel({1.0,0}),
 	sprites(surf)
 {
 	animations.reserve(size_t(Sequence::Count));
@@ -37,7 +37,22 @@ void Character::SetDirection(Vec2 dir)
 	}
 	else
 	{
-		sequence = Sequence::StandForward;
+		if (vel.y>0)
+		{
+			sequence = Sequence::StandForward;
+		}
+		else if (vel.y < 0)
+		{
+			sequence = Sequence::StandBack;
+		}
+		else if (vel.x > 0)
+		{
+			sequence = Sequence::StandRight;
+		}
+		else if (vel.x < 0)
+		{
+			sequence = Sequence::StandLeft;
+		}
 	}
 	vel = velocity * dir;
 }
@@ -51,6 +66,6 @@ void Character::Update(float dt)
 
 void Character::Draw(Graphics& gfx)
 {
-	animations[ (int) sequence ].Draw( gfx );
+	animations[ (int) sequence ].Draw( gfx,(int)pos.x,(int)pos.y );
 }
 
