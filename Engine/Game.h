@@ -50,7 +50,7 @@ private:
 	FrameTimer ft;
 	Character willy;
 	//Animation animation;
-	Vec2 pos = { 0,0 };
+	//Vec2 pos = { 0,0 };
 	
 	/********************************/
 };

@@ -61,6 +61,14 @@ void Game::UpdateModel()
 	{
 		willy.SetDirection({ 0,1 });
 	}
+	if (wnd.kbd.KeyIsPressed(VK_SPACE))
+	{
+		willy.SetSpeedFactor(2);
+	} 
+	else
+	{
+		willy.SetSpeedFactor(1);
+	}
 	willy.Update(dt);
 	//animation.Update(dt);
 }

@@ -1,32 +1,23 @@
 #pragma once
 #include "Animation.h"
 #include "Vec2.h"
+#include "RectI.h"
 
-Animation::Animation(int x, int y, int width, int height, int nFrames, Surface& surface)
+Animation::Animation(int x, int y, int width, int height, int nFrames, float hTime)
 	:
-	sprites(surface)
+	holdTime(hTime)
 {
 	frames.reserve(nFrames);
 	for (int n= 0; n < nFrames; n++)
 	{
-		Surface s(width, height);
-		int nPixels = width * height;
-		for (int i = 0; i < nPixels; i++)
-		{
-			s.PutPixel(i % width, i / width, surface.GetPixel(x + n*width + i % width, y + i / width));
-		}
-		frames.emplace_back(s);
+		frames.emplace_back( RectI( { x + n*width, y }, width, height ) );
 	}
 }
 
-
-void Animation::Draw(Graphics& gfx, Vei2 pos) 
+void Animation::Draw(Vei2 pos, Graphics& gfx, Surface& surface)
 {
-	//Surface s(frames[iCurrentFrame]);
-	gfx.DrawSprite(pos.x, pos.y, frames[iCurrentFrame]);// , Colors::Magenta);
-	
+	gfx.DrawSprite( pos.x,pos.y, frames[iCurrentFrame],  surface, Colors::Magenta);
 }
-
 
 void Animation::Update(float dt)
 {

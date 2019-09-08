@@ -11,6 +11,9 @@ public:
 	void SetDirection(Vec2 dir);
 	void Update(float dt);
 	void Draw(Graphics& gfx);
+	void SetSpeedFactor(float factor) {
+		speedFactor = factor;
+	}
 
 private:
 	enum class Sequence
@@ -28,10 +31,10 @@ private:
 private:
 	Vec2 pos;
 	Vec2 vel;
-	Surface& sprites;
+	Surface& spriteSheet;
 	std::vector<Animation> animations;
 	Sequence sequence = Sequence::StandForward;
 	float velocity = 160.0f;
-
+	float speedFactor = 1.0f;
 
 };
