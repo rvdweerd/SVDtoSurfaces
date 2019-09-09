@@ -27,6 +27,7 @@
 #include "FrameTimer.h"
 #include "Vec2.h"
 #include "Character.h"
+#include "BitmapText.h"
 
 class Game
 {
@@ -49,6 +50,7 @@ private:
 	Surface surf;
 	FrameTimer ft;
 	Character willy;
+	BitmapText bitmapText;
 	//Animation animation;
 	//Vec2 pos = { 0,0 };
 	

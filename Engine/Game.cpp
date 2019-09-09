@@ -25,8 +25,9 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	surf("link90x90.bmp"),
-	willy(surf)
+	surf("bitmaps\\link90x90.bmp"),
+	willy(surf),
+	bitmapText(gfx)
 	//animation(90, 0, 90, 90, 4, surf)
 {
 	
@@ -79,6 +80,9 @@ void Game::ComposeFrame()
 	//animation.Draw(pos, gfx);
 	//gfx.DrawSprite(0, 0, animation.frames[0], Colors::Magenta);
 	//animation.Draw(gfx);
+	bitmapText.DrawChar(100, 100, 'A', BitmapText::Font::Consolas13x24 );
+	bitmapText.DrawString(100, 130, "Rogier is briljant!! ;-) Consolas", BitmapText::Font::Consolas13x24);
+	bitmapText.DrawString(wnd.mouse.GetPosX(),wnd.mouse.GetPosY(), "Rogier is briljant!! ;-) FixedSys", BitmapText::Font::FixedSys16x28);
 }
 
 

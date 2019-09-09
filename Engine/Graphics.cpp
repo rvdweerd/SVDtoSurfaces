@@ -254,7 +254,7 @@ Graphics::~Graphics()
 
 RectI Graphics::GetScreenRect()
 {
-	return RectI({0,0}, ScreenWidth, ScreenHeight);
+	return { {0,0}, ScreenWidth, ScreenHeight };
 }
 
 void Graphics::EndFrame()
@@ -402,6 +402,11 @@ void Graphics::DrawSprite(int x, int y, RectI srcRect, const Surface& s, Color c
 
 void Graphics::DrawSprite(int x, int y, RectI srcRect, const RectI& clip, const Surface& s, Color chroma )
 {
+	DrawSprite(x, y, srcRect, clip, s, false, chroma);
+}
+
+void Graphics::DrawSprite(int x, int y, RectI srcRect, const RectI& clip, const Surface& s, bool isText, Color chroma)
+{
 	assert(clip.left >= 0);
 	assert(clip.right <= ScreenWidth);
 	assert(clip.top >= 0);
@@ -435,7 +440,14 @@ void Graphics::DrawSprite(int x, int y, RectI srcRect, const RectI& clip, const 
 			Color pixelColor = s.GetPixel(sx, sy);
 			if (pixelColor != chroma)
 			{
-				PutPixel(x + sx - srcRect.left, y + sy - srcRect.top, pixelColor);
+				if (isText)
+				{
+					PutPixel(x + sx - srcRect.left, y + sy - srcRect.top, Colors::White);
+				}
+				else
+				{
+					PutPixel(x + sx - srcRect.left, y + sy - srcRect.top, pixelColor);
+				}
 			}
 		}
 	}
