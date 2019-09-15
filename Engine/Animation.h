@@ -12,6 +12,7 @@ public:
 	void Draw(Vei2 pos, Graphics& gfx) const;
 	void Draw(Vei2 pos, Graphics& gfx,const RectI clip) const;
 	void Animation::DrawColor(Vei2 pos, Graphics& gfx, Color color) const;
+	void Animation::DrawTranslucent(Vei2 pos, Graphics& gfx) const;
 	void Update(float dt);
 	void Advance();
 

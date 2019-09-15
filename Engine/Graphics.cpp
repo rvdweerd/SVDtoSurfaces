@@ -492,6 +492,73 @@ void Graphics::DrawSpriteSubstitute(int x, int y, Color substitute, RectI srcRec
 	}
 }
 
+void Graphics::DrawSpriteTranslucent(int x, int y, const Surface& s, Color chroma)
+{
+	DrawSpriteTranslucent(x, y, s.GetRect(), s, chroma);
+}
+
+void Graphics::DrawSpriteTranslucent(int x, int y, RectI srcRect, const Surface& s, Color chroma)
+{
+	DrawSpriteTranslucent(x, y, srcRect, GetScreenRect(), s, chroma);
+}
+
+void Graphics::DrawSpriteTranslucent(int x, int y, RectI srcRect, const RectI& clip, const Surface& s, Color chroma)
+{
+	assert(clip.left >= 0);
+	assert(clip.right <= ScreenWidth);
+	assert(clip.top >= 0);
+	assert(clip.bottom <= ScreenHeight);
+	assert(srcRect.left >= 0);
+	assert(srcRect.right <= s.GetWidth());
+	assert(srcRect.top >= 0);
+	assert(srcRect.bottom <= s.GetHeight());
+	if (x < clip.left)
+	{
+		srcRect.left += clip.left - x;
+		x = clip.left;
+	}
+	if (y < clip.top)
+	{
+		srcRect.top += clip.top - y;
+		y = clip.top;
+	}
+	if (x + srcRect.GetWidth() > clip.right)
+	{
+		srcRect.right -= x + srcRect.GetWidth() - clip.right;
+	}
+	if (y + srcRect.GetHeight() > clip.bottom)
+	{
+		srcRect.bottom -= y + srcRect.GetHeight() - clip.bottom;
+	}
+	for (int sx = srcRect.left; sx < srcRect.right; sx++)
+	{
+		for (int sy = srcRect.top; sy < srcRect.bottom; sy++)
+		{
+			const Color origPixelColor= s.GetPixel(sx, sy);
+			
+			if (origPixelColor != chroma)
+			{
+				const int screenX = x + sx - srcRect.left;
+				const int screenY = y + sy - srcRect.top;
+				const Color backgroundColor = pSysBuffer[Graphics::ScreenWidth * screenY + screenX];
+				if (backgroundColor != Colors::Black)
+				{
+					const Color blendedPixelColor = Color(
+										(origPixelColor.GetR() + backgroundColor.GetR()) / 2,
+										(origPixelColor.GetG() + backgroundColor.GetG()) / 2,
+										(origPixelColor.GetB() + backgroundColor.GetB()) / 2   
+										);
+					PutPixel(screenX, screenY, blendedPixelColor);
+				}
+				else
+				{
+					PutPixel(screenX, screenY, origPixelColor);
+				}
+			}
+		}
+	}
+}
+
 
 void Graphics::DrawRect(RectI rect, Color c)
 {
@@ -507,6 +574,16 @@ void Graphics::DrawRect(RectI rect, Color c)
 	}
 }
 
+void Graphics::DrawRectFilled(RectI rect, Color c)
+{
+	for (int i = rect.left; i < rect.right; i++)
+	{
+		for (int j = rect.top; j < rect.bottom; j++)
+		{
+			PutPixel(i, j, c);
+		}
+	}
+}
 
 //////////////////////////////////////////////////
 //           Graphics Exception

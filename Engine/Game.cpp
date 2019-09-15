@@ -93,10 +93,16 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
+	//bitmapText.DrawChar(100, 100, Colors::Red, 'A', BitmapText::Font::Consolas13x24 );
+	bitmapText.DrawString(100, 130, Colors::White, "Fun Times", BitmapText::Font::Consolas13x24);
+	//bitmapText.DrawString(wnd.mouse.GetPosX(),wnd.mouse.GetPosY(), Colors::Blue, "Weeeeee", BitmapText::Font::FixedSys16x28);
+	gfx.DrawRectFilled({ {100,250},100,80 }, Colors::Blue);
+	gfx.DrawRectFilled({ {240,250},100,80 }, Colors::Red);
+	gfx.DrawRectFilled({ {380,250},100,80 }, Colors::Yellow);
+	gfx.DrawRectFilled({ {520,250},100,80 }, Colors::Green);
+	gfx.DrawRectFilled({ {660,250},100,80 }, Colors::LightGray);
 	willy.Draw(gfx);
-	bitmapText.DrawChar(100, 100, Colors::Red, 'A', BitmapText::Font::Consolas13x24 );
-	bitmapText.DrawString(100, 130, Colors::White, "Rogier is briljant!! ;-) Consolas", BitmapText::Font::Consolas13x24);
-	bitmapText.DrawString(wnd.mouse.GetPosX(),wnd.mouse.GetPosY(), Colors::Blue, "Rogier is briljant!! ;-) FixedSys", BitmapText::Font::FixedSys16x28);
+
 }
 
 

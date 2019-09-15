@@ -4,8 +4,8 @@
 
 Character::Character(Surface& surf)
 	:
-	pos({10,10}),
-	vel({1.0,0}),
+	pos({10,250}),
+	vel({0,1.0}),
 	spriteSheet(surf)
 {
 	animations.reserve(size_t(Sequence::Count));
@@ -77,11 +77,14 @@ void Character::Draw(Graphics& gfx)
 {
 	if (distort || effectActive)
 	{
-		animations[(int)sequence].DrawColor((Vei2)pos, gfx, Colors::Red );
+		//animations[(int)sequence].DrawColor((Vei2)pos, gfx, Colors::Red );
+		animations[(int)sequence].DrawTranslucent((Vei2)pos, gfx);
 	}
 	else
 	{
-		animations[(int)sequence].Draw((Vei2)pos, gfx);
+		//animations[(int)sequence].Draw((Vei2)pos, gfx);
+		animations[(int)sequence].DrawTranslucent((Vei2)pos, gfx);
+
 	}
 }
 

@@ -48,7 +48,7 @@ private:
 	Surface& spriteSheet;
 	std::vector<Animation> animations;
 	Sequence sequence = Sequence::StandForward;
-	float velocity = 200.0f;
+	float velocity = 140.0f;
 	float speedFactor = 1.0f;
 	bool distort = false;
 	static constexpr float effectDuration = 0.045f;
