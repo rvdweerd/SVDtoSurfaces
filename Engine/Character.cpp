@@ -63,12 +63,25 @@ void Character::Update(float dt)
 {
 	animations[ (int) sequence ].Update(dt);
 	pos += speedFactor * vel * dt;
+	if (effectActive)
+	{
+		effectTime -= dt;
+		if (effectTime < 0)
+		{
+			effectActive = false;
+		}
+	}
 }
-
 
 void Character::Draw(Graphics& gfx)
 {
-	//Vei2 posInt{ (int)pos.x , (int)pos.y };
-	animations[ (int) sequence ].Draw( (Vei2)pos, gfx);
+	if (distort || effectActive)
+	{
+		animations[(int)sequence].DrawColor((Vei2)pos, gfx, Colors::Red );
+	}
+	else
+	{
+		animations[(int)sequence].Draw((Vei2)pos, gfx);
+	}
 }
 

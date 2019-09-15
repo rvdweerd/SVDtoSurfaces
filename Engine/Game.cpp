@@ -27,7 +27,8 @@ Game::Game(MainWindow& wnd)
 	gfx(wnd),
 	surf("bitmaps\\link90x90.bmp"),
 	willy(surf),
-	bitmapText(gfx)
+	bitmapText(gfx),
+	soundHit(L"sounds\\hit.wav")
 {	
 }
 
@@ -60,14 +61,33 @@ void Game::UpdateModel()
 	{
 		willy.SetDirection({ 0,1 });
 	}
-	if (wnd.kbd.KeyIsPressed(VK_SPACE))
+	/**if (wnd.kbd.KeyIsPressed(0x51))
 	{
-		willy.SetSpeedFactor(2);
-	} 
-	else
+		willy.ActivateEffect();
+		soundHit.Play();
+	} */
+	while (!wnd.kbd.KeyIsEmpty())
 	{
-		willy.SetSpeedFactor(1);
+		const Keyboard::Event e = wnd.kbd.ReadKey();
+		if ( e.GetCode() == VK_SPACE )
+		{
+			if (e.IsRelease())
+			{
+				willy.SetSpeedFactor(1);
+			}
+			else if (e.IsPress())
+			{
+				willy.SetSpeedFactor(2);
+			}
+		}
+		if (e.GetCode() == 0x51 && e.IsPress() )
+		{
+			willy.ActivateEffect();
+			soundHit.Play();
+		}
 	}
+
+	
 	willy.Update(dt);
 }
 

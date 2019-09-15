@@ -28,6 +28,7 @@
 #include "Vec2.h"
 #include "Character.h"
 #include "BitmapText.h"
+#include "Sound.h"
 
 class Game
 {
@@ -51,6 +52,7 @@ private:
 	FrameTimer ft;
 	Character willy;
 	BitmapText bitmapText;
+	Sound soundHit;
 	
 	/********************************/
 };

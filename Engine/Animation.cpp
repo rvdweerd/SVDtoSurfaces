@@ -20,6 +20,11 @@ void Animation::Draw(Vei2 pos, Graphics& gfx) const
 	gfx.DrawSprite( pos.x,pos.y, frames[iCurrentFrame],  spriteSheet, Colors::Magenta);
 }
 
+void Animation::DrawColor(Vei2 pos, Graphics& gfx, Color color) const
+{
+	gfx.DrawSpriteSubstitute(pos.x, pos.y, color, frames[iCurrentFrame], spriteSheet, Colors::Magenta);
+}
+
 void Animation::Draw(Vei2 pos, Graphics& gfx, const RectI clip) const
 {
 	gfx.DrawSprite(pos.x, pos.y, frames[iCurrentFrame], clip, spriteSheet, Colors::Magenta);

@@ -11,6 +11,7 @@ public:
 	Animation(int x, int y, int width, int height, int nFrames, float hTime, Surface& spriteSheet_in);
 	void Draw(Vei2 pos, Graphics& gfx) const;
 	void Draw(Vei2 pos, Graphics& gfx,const RectI clip) const;
+	void Animation::DrawColor(Vei2 pos, Graphics& gfx, Color color) const;
 	void Update(float dt);
 	void Advance();
 

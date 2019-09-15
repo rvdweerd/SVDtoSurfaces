@@ -11,8 +11,22 @@ public:
 	void SetDirection(Vec2 dir);
 	void Update(float dt);
 	void Draw(Graphics& gfx);
-	void SetSpeedFactor(float factor) {
+	void SetSpeedFactor(float factor) 
+	{
 		speedFactor = factor;
+		if (factor > 1.01f)
+		{
+			distort = true;
+		}
+		else
+		{
+			distort = false;
+		}
+	}
+	void ActivateEffect()
+	{
+		effectActive = true;
+		effectTime = effectDuration;
 	}
 
 private:
@@ -36,5 +50,8 @@ private:
 	Sequence sequence = Sequence::StandForward;
 	float velocity = 200.0f;
 	float speedFactor = 1.0f;
-
+	bool distort = false;
+	static constexpr float effectDuration = 0.045f;
+	bool effectActive = false;
+	float effectTime = 0.0f;
 };
