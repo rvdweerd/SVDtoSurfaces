@@ -18,8 +18,8 @@ public:
 public:
 	BitmapText(Graphics& gfx);
 	RectI GetChar(char ch, Font font);
-	void DrawChar(int x, int y, char ch, Font font);
-	void DrawString(int x, int y, std::string str, Font font);
+	void DrawChar(int x, int y, Color textColor, char ch, Font font);
+	void DrawString(int x, int y, Color textColor, std::string str, Font font);
 
 private:
 	Graphics& gfx;

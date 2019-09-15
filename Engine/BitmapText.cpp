@@ -22,17 +22,17 @@ RectI BitmapText::GetChar(char ch, Font font)
 	return { { (i%32) * fontWidth , (i/32)* fontHeight},fontWidth,fontHeight };
 }
 
-void BitmapText::DrawChar(int x, int y, char ch, Font font)
+void BitmapText::DrawChar(int x, int y, Color textColor, char ch, Font font)
 {
-	gfx.DrawSprite( x , y , GetChar(ch,font) , gfx.GetScreenRect() , fontSpriteSheets[int(font)] , true , Colors::White);
+	gfx.DrawSpriteSubstitute( x , y , textColor, GetChar(ch,font) , gfx.GetScreenRect() , fontSpriteSheets[int(font)] , Colors::White);
 }
 
-void BitmapText::DrawString(int x, int y, std::string str, Font font)
+void BitmapText::DrawString(int x, int y, Color textColor, std::string str, Font font)
 {
 	int fontWidth = fontSizes[(int)font].x;
 	int i = 0;
 	for (char ch : str)
 	{
-		DrawChar(x + fontWidth *  i++  , y , ch , font);
+		DrawChar(x + fontWidth *  i++  , y , textColor, ch , font);
 	}
 }

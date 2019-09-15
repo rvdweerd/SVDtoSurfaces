@@ -400,12 +400,7 @@ void Graphics::DrawSprite(int x, int y, RectI srcRect, const Surface& s, Color c
 	DrawSprite(x, y, srcRect, GetScreenRect(), s, chroma);
 }
 
-void Graphics::DrawSprite(int x, int y, RectI srcRect, const RectI& clip, const Surface& s, Color chroma )
-{
-	DrawSprite(x, y, srcRect, clip, s, false, chroma);
-}
-
-void Graphics::DrawSprite(int x, int y, RectI srcRect, const RectI& clip, const Surface& s, bool isText, Color chroma)
+void Graphics::DrawSprite(int x, int y, RectI srcRect, const RectI& clip, const Surface& s, Color chroma)
 {
 	assert(clip.left >= 0);
 	assert(clip.right <= ScreenWidth);
@@ -440,18 +435,63 @@ void Graphics::DrawSprite(int x, int y, RectI srcRect, const RectI& clip, const 
 			Color pixelColor = s.GetPixel(sx, sy);
 			if (pixelColor != chroma)
 			{
-				if (isText)
-				{
-					PutPixel(x + sx - srcRect.left, y + sy - srcRect.top, Colors::White);
-				}
-				else
-				{
-					PutPixel(x + sx - srcRect.left, y + sy - srcRect.top, pixelColor);
-				}
+				PutPixel(x + sx - srcRect.left, y + sy - srcRect.top, pixelColor);
 			}
 		}
 	}
 }
+
+void Graphics::DrawSpriteSubstitute(int x, int y, Color substitute, const Surface& s, Color chroma)
+{
+	DrawSpriteSubstitute(x, y, substitute, s.GetRect(), s, chroma);
+}
+
+void Graphics::DrawSpriteSubstitute(int x, int y, Color substitute, RectI srcRect, const Surface& s, Color chroma)
+{
+	DrawSpriteSubstitute(x, y, substitute, srcRect, GetScreenRect(), s, chroma);
+}
+
+void Graphics::DrawSpriteSubstitute(int x, int y, Color substitute, RectI srcRect, const RectI& clip, const Surface& s, Color chroma)
+{
+	assert(clip.left >= 0);
+	assert(clip.right <= ScreenWidth);
+	assert(clip.top >= 0);
+	assert(clip.bottom <= ScreenHeight);
+	assert(srcRect.left >= 0);
+	assert(srcRect.right <= s.GetWidth());
+	assert(srcRect.top >= 0);
+	assert(srcRect.bottom <= s.GetHeight());
+	if (x < clip.left)
+	{
+		srcRect.left += clip.left - x;
+		x = clip.left;
+	}
+	if (y < clip.top)
+	{
+		srcRect.top += clip.top - y;
+		y = clip.top;
+	}
+	if (x + srcRect.GetWidth() > clip.right)
+	{
+		srcRect.right -= x + srcRect.GetWidth() - clip.right;
+	}
+	if (y + srcRect.GetHeight() > clip.bottom)
+	{
+		srcRect.bottom -= y + srcRect.GetHeight() - clip.bottom;
+	}
+	for (int sx = srcRect.left; sx < srcRect.right; sx++)
+	{
+		for (int sy = srcRect.top; sy < srcRect.bottom; sy++)
+		{
+			Color pixelColor = s.GetPixel(sx, sy);
+			if (pixelColor != chroma)
+			{
+				PutPixel(x + sx - srcRect.left, y + sy - srcRect.top, substitute);
+			}
+		}
+	}
+}
+
 
 void Graphics::DrawRect(RectI rect, Color c)
 {

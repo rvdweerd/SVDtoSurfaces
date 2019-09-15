@@ -51,8 +51,6 @@ private:
 	FrameTimer ft;
 	Character willy;
 	BitmapText bitmapText;
-	//Animation animation;
-	//Vec2 pos = { 0,0 };
 	
 	/********************************/
 };
