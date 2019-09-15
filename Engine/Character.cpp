@@ -4,8 +4,8 @@
 
 Character::Character(Surface& surf)
 	:
-	pos({10,250}),
-	vel({0,1.0}),
+	pos(10.0f,250.0f),
+	vel(0.0f,1.0f),
 	spriteSheet(surf)
 {
 	animations.reserve(size_t(Sequence::Count));
@@ -56,13 +56,13 @@ void Character::SetDirection(Vec2 dir)
 			sequence = Sequence::StandLeft;
 		}
 	}
-	vel = velocity * dir;
+	vel = dir * velocity;
 }
 
 void Character::Update(float dt)
 {
 	animations[ (int) sequence ].Update(dt);
-	pos += speedFactor * vel * dt;
+	pos += vel * (speedFactor * dt);
 	if (effectActive)
 	{
 		effectTime -= dt;
