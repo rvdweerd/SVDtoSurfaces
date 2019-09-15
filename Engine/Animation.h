@@ -15,7 +15,6 @@ public:
 	{
 		gfx.DrawSprite(pos.x, pos.y, frames[iCurrentFrame], spriteSheet, effect);
 	}
-	//void Draw(Vei2 pos, Graphics& gfx,const RectI clip) const;
 	void Update(float dt);
 	void Advance();
 

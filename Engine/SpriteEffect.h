@@ -63,9 +63,7 @@ namespace SpriteEffect
 			const Color origPixelColor = cSrc;
 			if (origPixelColor != chroma)
 			{
-				//const int screenX = x + sx - srcRect.left;
-				//const int screenY = y + sy - srcRect.top;
-				const Color backgroundColor = gfx.GetPixel( xDest , yDest );// pSysBuffer[Graphics::ScreenWidth * screenY + screenX];
+				const Color backgroundColor = gfx.GetPixel( xDest , yDest );
 				if (backgroundColor != Colors::Black)
 				{
 					const Color blendedPixelColor = Color(
@@ -95,12 +93,9 @@ namespace SpriteEffect
 		}
 		void operator()(int xDest, int yDest, Color cSrc, Graphics& gfx) const
 		{
-			//const Color origPixelColor = sub;
 			if (cSrc != chroma)
 			{
-				//const int screenX = x + sx - srcRect.left;
-				//const int screenY = y + sy - srcRect.top;
-				const Color backgroundColor = gfx.GetPixel(xDest, yDest);// pSysBuffer[Graphics::ScreenWidth * screenY + screenX];
+				const Color backgroundColor = gfx.GetPixel(xDest, yDest);
 				if (backgroundColor != Colors::Black)
 				{
 					const Color blendedPixelColor = Color(
@@ -121,30 +116,3 @@ namespace SpriteEffect
 		Color sub;
 	};
 }
-
-
-
-/*
-//==============================================================================
-//DRAWSPRITE TRANSLUCENT
-const Color origPixelColor = s.GetPixel(sx, sy);
-if (origPixelColor != chroma)
-{
-	const int screenX = x + sx - srcRect.left;
-	const int screenY = y + sy - srcRect.top;
-	const Color backgroundColor = pSysBuffer[Graphics::ScreenWidth * screenY + screenX];
-	if (backgroundColor != Colors::Black)
-	{
-		const Color blendedPixelColor = Color(
-			(origPixelColor.GetR() + backgroundColor.GetR()) / 2,
-			(origPixelColor.GetG() + backgroundColor.GetG()) / 2,
-			(origPixelColor.GetB() + backgroundColor.GetB()) / 2
-		);
-		PutPixel(screenX, screenY, blendedPixelColor);
-	}
-	else
-	{
-		PutPixel(screenX, screenY, origPixelColor);
-	}
-}
-*/

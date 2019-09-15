@@ -15,13 +15,6 @@ Animation::Animation(int x, int y, int width, int height, int nFrames, float hTi
 	}
 }
 
-
-
-/*void Animation::Draw(Vei2 pos, Graphics& gfx, const RectI clip) const
-{
-	gfx.DrawSprite(pos.x, pos.y, frames[iCurrentFrame], clip, spriteSheet, Colors::Magenta);
-}*/
-
 void Animation::Update(float dt)
 {
 	currentFrameTime += dt;

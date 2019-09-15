@@ -47,10 +47,6 @@ public:
 	{
 		return Vec2_( x*rhs, y*rhs);
 	}
-	//Vec2_ operator*(T lhs, const Vec2_& rhs)
-	//{
-	//	return Vec2_(lhs * rhs.x, lhs * rhs.y);
-	//};
 	Vec2_& operator*=(const T rhs)
 	{
 		return *this = *this * rhs;

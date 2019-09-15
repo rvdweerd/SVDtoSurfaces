@@ -4,10 +4,10 @@
 #include "Vec2.h"
 #include "Surface.h"
 
-class Character
+class Character2
 {
 public:
-	Character(Surface& surf);
+	Character2(Surface& surf);
 	void SetDirection(Vec2 dir);
 	void Update(float dt);
 	void Draw(Graphics& gfx);

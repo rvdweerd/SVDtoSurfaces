@@ -1,26 +1,28 @@
 #pragma once
-#include "Character.h"
+#include "Character2.h"
 #include "Vec2.h"
 #include "SpriteEffect.h"
+#include <algorithm>
 
-Character::Character(Surface& surf)
+Character2::Character2(Surface& surf)
 	:
-	pos{ 10,300 },
+	pos{ 10,250 },
 	vel(0.0f,1.0f),
 	spriteSheet(surf)
 {
 	animations.reserve(size_t(Sequence::Count));
 	for (int i = 0; i < 4; i++)
 	{
-		animations.emplace_back(Animation(90, 90*i , 90, 90, 4, 0.15f, surf));
+		animations.emplace_back(Animation(0, 125*(i%2) , 125, 125, 16, 0.04f, surf));
 	}
 	for (int i = 0; i < 4; i++)
 	{
-		animations.emplace_back(Animation(0, 90*i , 90, 90, 1, 0.15f, surf));
+		animations.emplace_back(Animation(375, 125*(i%2) , 125, 125, 1, 0.15f, surf));
 	}
+	std::reverse(animations[1].frames.begin(), animations[1].frames.end());
 }
 
-void Character::SetDirection(Vec2 dir)
+void Character2::SetDirection(Vec2 dir)
 {
 	if (dir.x > 0)
 	{
@@ -60,7 +62,7 @@ void Character::SetDirection(Vec2 dir)
 	vel = dir * velocity;
 }
 
-void Character::Update(float dt)
+void Character2::Update(float dt)
 {
 	animations[ (int) sequence ].Update(dt);
 	pos += vel * (speedFactor * dt);
@@ -74,11 +76,11 @@ void Character::Update(float dt)
 	}
 }
 
-void Character::Draw(Graphics& gfx)
+void Character2::Draw(Graphics& gfx)
 {
-	SpriteEffect::Ghost effectGhost{ Colors::Magenta };
-	SpriteEffect::Substitution effectSubst{ Colors::Magenta , Colors::Red };
-	SpriteEffect::SubstitutionGhost effectSubGhost{ Colors::Magenta , Colors::Red };
+	SpriteEffect::Ghost effectGhost{ Colors::White };
+	SpriteEffect::Substitution effectSubst{ Colors::White , Colors::Red };
+	SpriteEffect::SubstitutionGhost effectSubGhost{ Colors::White , Colors::Red };
 	if (hitActive)
 	{
 		animations[(int)sequence].Draw((Vei2)pos, gfx, effectSubst);
@@ -90,7 +92,6 @@ void Character::Draw(Graphics& gfx)
 	else
 	{
 		animations[(int)sequence].Draw((Vei2)pos, gfx, effectGhost);
-
 	}
 }
 

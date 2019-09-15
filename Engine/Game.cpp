@@ -26,7 +26,9 @@ Game::Game(MainWindow& wnd)
 	wnd(wnd),
 	gfx(wnd),
 	surf("bitmaps\\link90x90.bmp"),
+	surf2("bitmaps\\laura.bmp"),
 	willy(surf),
+	laura(surf2),
 	bitmapText(gfx),
 	soundHit(L"sounds\\hit.wav")
 {	
@@ -43,7 +45,24 @@ void Game::Go()
 void Game::UpdateModel()
 {
 	float dt = ft.Mark();
-	
+	laura.SetDirection({ 0,0 });
+	if (wnd.kbd.KeyIsPressed(0x44))
+	{
+		laura.SetDirection({ 1,0 });
+	}
+	if (wnd.kbd.KeyIsPressed(0x41))
+	{
+		laura.SetDirection({ -1,0 });
+	}
+	if (wnd.kbd.KeyIsPressed(0x57))
+	{
+		laura.SetDirection({ 0,-1 });
+	}
+	if (wnd.kbd.KeyIsPressed(0x53))
+	{
+		laura.SetDirection({ 0,1 });
+	}
+
 	willy.SetDirection({ 0,0 });
 	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
 	{
@@ -87,21 +106,21 @@ void Game::UpdateModel()
 		}
 	}
 
-	
+	laura.Update(dt);
 	willy.Update(dt);
 }
 
 void Game::ComposeFrame()
 {
-	//bitmapText.DrawChar(100, 100, Colors::Red, 'A', BitmapText::Font::Consolas13x24 );
 	bitmapText.DrawString(100, 130, Colors::White, "Fun Times", BitmapText::Font::Consolas13x24);
 	//bitmapText.DrawString(wnd.mouse.GetPosX(),wnd.mouse.GetPosY(), Colors::Blue, "Weeeeee", BitmapText::Font::FixedSys16x28);
-	gfx.DrawRectFilled({ {100,250},100,80 }, Colors::Blue);
-	gfx.DrawRectFilled({ {240,250},100,80 }, Colors::Red);
-	gfx.DrawRectFilled({ {380,250},100,80 }, Colors::Yellow);
-	gfx.DrawRectFilled({ {520,250},100,80 }, Colors::Green);
-	gfx.DrawRectFilled({ {660,250},100,80 }, Colors::LightGray);
+	gfx.DrawRectFilled({ {200,250},50,125 }, Colors::Blue);
+	gfx.DrawRectFilled({ {300,250},50,125 }, Colors::Red);
+	gfx.DrawRectFilled({ {400,250},50,125 }, Colors::Yellow);
+	gfx.DrawRectFilled({ {500,250},50,125 }, Colors::Green);
+	gfx.DrawRectFilled({ {600,250},50,125 }, Colors::LightGray);
 	willy.Draw(gfx);
+	laura.Draw(gfx);
 
 }
 
