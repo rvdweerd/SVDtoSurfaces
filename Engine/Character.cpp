@@ -4,7 +4,7 @@
 
 Character::Character(Surface& surf)
 	:
-	pos(10.0f,250.0f),
+	pos{ 10,250 },
 	vel(0.0f,1.0f),
 	spriteSheet(surf)
 {

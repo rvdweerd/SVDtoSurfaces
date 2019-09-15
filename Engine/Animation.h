@@ -3,7 +3,7 @@
 #include <vector>
 #include "Graphics.h"
 #include "Vec2.h"
-#include "RectI.h"
+#include "Rect.h"
 
 class Animation
 {

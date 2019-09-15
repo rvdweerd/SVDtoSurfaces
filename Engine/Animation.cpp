@@ -1,7 +1,7 @@
 #pragma once
 #include "Animation.h"
 #include "Vec2.h"
-#include "RectI.h"
+#include "Rect.h"
 
 Animation::Animation(int x, int y, int width, int height, int nFrames, float hTime, Surface& spriteSheet_in)
 	:

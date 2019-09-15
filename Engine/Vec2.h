@@ -58,20 +58,20 @@ public:
 	{
 		//return std::sqrt(x*x+y*y);
 		//return std::sqrt(this->LengthSq());
-		return std::sqrt(LengthSq());
+		return (T)std::sqrt(LengthSq());
 	}
 	T LengthSq() const
 	{
-		return x * x + y * y;
+		return (T)(x * x + y * y);
 	}
 	Vec2_ GetNormalized() const
 	{
 		T len = Length();
-		if (len == 0.0f)
+		if (len == T(0))
 		{
 			return *this;
 		}
-		return *this * (1.0f / Length());
+		return *this * ((T)1 / Length());
 	}
 	Vec2_& Normalize()
 	{
