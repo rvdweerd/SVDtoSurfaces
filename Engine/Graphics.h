@@ -26,6 +26,8 @@
 #include "Colors.h"
 #include "Surface.h"
 #include "Rect.h"
+//#include <assert.h>
+#include <cassert>
 
 class Graphics
 {
@@ -59,21 +61,61 @@ public:
 		PutPixel( x,y,{ unsigned char( r ),unsigned char( g ),unsigned char( b ) } );
 	}
 	void PutPixel( int x,int y,Color c );
-	void DrawSpriteNonChroma(int x, int y, const Surface& s);
-	void DrawSpriteNonChroma(int x, int y, const RectI& srcRect, const Surface& s);
-	void DrawSpriteNonChroma(int x, int y, RectI srcRect, const RectI& clip, const Surface& s);
-	
-	void DrawSprite(int x, int y,  const Surface& s, Color chroma = Colors::Magenta);
-	void DrawSprite(int x, int y, RectI srcRect, const Surface& s, Color chroma = Colors::Magenta);
-	void DrawSprite(int x, int y, RectI srcRect, const RectI& clip, const Surface& s, Color chroma = Colors::Magenta);
+	const Color GetPixel(const int x, const int y) const;
+	template<typename E>
+	void DrawSprite(int x, int y, const Surface& s, E effect)
+	{
+		DrawSprite(x, y, s.GetRect(), s, effect);
+	}
+	template<typename E>
+	void DrawSprite(int x, int y, const RectI& srcRect, const Surface& s, E effect)
+	{
+		DrawSprite(x, y, srcRect, GetScreenRect(), s, effect);
+	}
+	template<typename E>
+	void DrawSprite(int x, int y, RectI srcRect, const RectI& clip, const Surface& s, E effect)
+	{
+		assert(clip.left >= 0);
+		assert(clip.right <= ScreenWidth);
+		assert(clip.top >= 0);
+		assert(clip.bottom <= ScreenHeight);
+		assert(srcRect.left >= 0);
+		assert(srcRect.right <= s.GetWidth());
+		assert(srcRect.top >= 0);
+		assert(srcRect.bottom <= s.GetHeight());
+		if (x < clip.left)
+		{
+			srcRect.left += clip.left - x;
+			x = clip.left;
+		}
+		if (y < clip.top)
+		{
+			srcRect.top += clip.top - y;
+			y = clip.top;
+		}
+		if (x + srcRect.GetWidth() > clip.right)
+		{
+			srcRect.right -= x + srcRect.GetWidth() - clip.right;
+		}
+		if (y + srcRect.GetHeight() > clip.bottom)
+		{
+			srcRect.bottom -= y + srcRect.GetHeight() - clip.bottom;
+		}
+		for (int sx = srcRect.left; sx < srcRect.right; sx++)
+		{
+			for (int sy = srcRect.top; sy < srcRect.bottom; sy++)
+			{
+				//PutPixel(x + sx - srcRect.left, y + sy - srcRect.top, s.GetPixel(sx, sy));
+				effect(
+					x + sx - srcRect.left, 
+					y + sy - srcRect.top, 
+					s.GetPixel(sx, sy), 
+					*this
+				);
+			}
+		}
+	}
 
-	void DrawSpriteSubstitute(int x, int y, Color substitute, const Surface& s, Color chroma = Colors::Magenta);
-	void DrawSpriteSubstitute(int x, int y, Color substitute, RectI srcRect, const Surface& s, Color chroma = Colors::Magenta);
-	void DrawSpriteSubstitute(int x, int y, Color substitute, RectI srcRect, const RectI& clip, const Surface& s, Color chroma = Colors::Magenta);
-
-	void DrawSpriteTranslucent(int x, int y, const Surface& s, Color chroma = Colors::Magenta);
-	void DrawSpriteTranslucent(int x, int y, RectI srcRect, const Surface& s, Color chroma = Colors::Magenta);
-	void DrawSpriteTranslucent(int x, int y, RectI srcRect, const RectI& clip, const Surface& s, Color chroma = Colors::Magenta);
 
 	void DrawRect(RectI rect, Color c);
 	void DrawRectFilled(RectI rect, Color c);

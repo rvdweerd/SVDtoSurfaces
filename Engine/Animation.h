@@ -4,15 +4,18 @@
 #include "Graphics.h"
 #include "Vec2.h"
 #include "Rect.h"
+#include "SpriteEffect.h"
 
 class Animation
 {
 public:
 	Animation(int x, int y, int width, int height, int nFrames, float hTime, Surface& spriteSheet_in);
-	void Draw(Vei2 pos, Graphics& gfx) const;
-	void Draw(Vei2 pos, Graphics& gfx,const RectI clip) const;
-	void Animation::DrawColor(Vei2 pos, Graphics& gfx, Color color) const;
-	void Animation::DrawTranslucent(Vei2 pos, Graphics& gfx) const;
+	template <typename E>
+	void Draw(Vei2 pos, Graphics& gfx, E effect) const
+	{
+		gfx.DrawSprite(pos.x, pos.y, frames[iCurrentFrame], spriteSheet, effect);
+	}
+	//void Draw(Vei2 pos, Graphics& gfx,const RectI clip) const;
 	void Update(float dt);
 	void Advance();
 

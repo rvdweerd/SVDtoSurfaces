@@ -3,6 +3,7 @@
 #include "Animation.h"
 #include "Vec2.h"
 #include "Surface.h"
+//#include "SpriteEffect.h"
 
 class Character
 {
@@ -23,10 +24,10 @@ public:
 			distort = false;
 		}
 	}
-	void ActivateEffect()
+	void ActivateHit()
 	{
-		effectActive = true;
-		effectTime = effectDuration;
+		hitActive = true;
+		hitTime = hitDuration;
 	}
 
 private:
@@ -51,7 +52,7 @@ private:
 	float velocity = 140.0f;
 	float speedFactor = 1.0f;
 	bool distort = false;
-	static constexpr float effectDuration = 0.045f;
-	bool effectActive = false;
-	float effectTime = 0.0f;
+	static constexpr float hitDuration = 0.045f;
+	bool hitActive = false;
+	float hitTime = 0.0f;
 };

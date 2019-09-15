@@ -82,7 +82,7 @@ void Game::UpdateModel()
 		}
 		if (e.GetCode() == 0x51 && e.IsPress() )
 		{
-			willy.ActivateEffect();
+			willy.ActivateHit();
 			soundHit.Play();
 		}
 	}

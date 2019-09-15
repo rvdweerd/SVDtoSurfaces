@@ -15,26 +15,12 @@ Animation::Animation(int x, int y, int width, int height, int nFrames, float hTi
 	}
 }
 
-void Animation::Draw(Vei2 pos, Graphics& gfx) const
-{
-	gfx.DrawSprite( pos.x,pos.y, frames[iCurrentFrame],  spriteSheet, Colors::Magenta);
-}
-
-void Animation::DrawColor(Vei2 pos, Graphics& gfx, Color color) const
-{
-	gfx.DrawSpriteSubstitute(pos.x, pos.y, color, frames[iCurrentFrame], spriteSheet, Colors::Magenta);
-}
-
-void Animation::DrawTranslucent(Vei2 pos, Graphics& gfx) const
-{
-	gfx.DrawSpriteTranslucent(pos.x, pos.y, frames[iCurrentFrame], spriteSheet, Colors::Magenta);
-}
 
 
-void Animation::Draw(Vei2 pos, Graphics& gfx, const RectI clip) const
+/*void Animation::Draw(Vei2 pos, Graphics& gfx, const RectI clip) const
 {
 	gfx.DrawSprite(pos.x, pos.y, frames[iCurrentFrame], clip, spriteSheet, Colors::Magenta);
-}
+}*/
 
 void Animation::Update(float dt)
 {

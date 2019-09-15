@@ -1,6 +1,7 @@
 #pragma once
 #include "Character.h"
 #include "Vec2.h"
+#include "SpriteEffect.h"
 
 Character::Character(Surface& surf)
 	:
@@ -63,27 +64,34 @@ void Character::Update(float dt)
 {
 	animations[ (int) sequence ].Update(dt);
 	pos += vel * (speedFactor * dt);
-	if (effectActive)
+	if (hitActive)
 	{
-		effectTime -= dt;
-		if (effectTime < 0)
+		hitTime -= dt;
+		if (hitTime < 0)
 		{
-			effectActive = false;
+			hitActive = false;
 		}
 	}
 }
 
 void Character::Draw(Graphics& gfx)
 {
-	if (distort || effectActive)
+	SpriteEffect::Ghost effectGhost{ Colors::Magenta };
+	SpriteEffect::Substitution effectSubst{ Colors::Magenta , Colors::Red };
+	SpriteEffect::SubstitutionGhost effectSubGhost{ Colors::Magenta , Colors::Red };
+	if (hitActive)
 	{
 		//animations[(int)sequence].DrawColor((Vei2)pos, gfx, Colors::Red );
-		animations[(int)sequence].DrawTranslucent((Vei2)pos, gfx);
+		animations[(int)sequence].Draw((Vei2)pos, gfx, effectSubst);
+	}
+	else if (distort)
+	{
+		animations[(int)sequence].Draw((Vei2)pos, gfx, effectSubGhost);
 	}
 	else
 	{
 		//animations[(int)sequence].Draw((Vei2)pos, gfx);
-		animations[(int)sequence].DrawTranslucent((Vei2)pos, gfx);
+		animations[(int)sequence].Draw((Vei2)pos, gfx, effectGhost);
 
 	}
 }

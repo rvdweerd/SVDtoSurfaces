@@ -1,6 +1,7 @@
 #include "BitmapText.h"
 #include <assert.h>
 #include "Colors.h"
+#include "SpriteEffect.h"
 
 BitmapText::BitmapText(Graphics& gfx)
 	:
@@ -24,7 +25,10 @@ RectI BitmapText::GetChar(char ch, Font font)
 
 void BitmapText::DrawChar(int x, int y, Color textColor, char ch, Font font)
 {
-	gfx.DrawSpriteSubstitute( x , y , textColor, GetChar(ch,font) , gfx.GetScreenRect() , fontSpriteSheets[int(font)] , Colors::White);
+	// create effect functor
+	SpriteEffect::Substitution e{ Colors::White, textColor };
+	// draw the character
+	gfx.DrawSprite( x , y , GetChar(ch,font) , gfx.GetScreenRect() , fontSpriteSheets[int(font)] , e);
 }
 
 void BitmapText::DrawString(int x, int y, Color textColor, std::string str, Font font)
