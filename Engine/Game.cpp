@@ -20,15 +20,15 @@
  ******************************************************************************************/
 #include "MainWindow.h"
 #include "Game.h"
+#include "CharacterLoads.h"
 
 Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	surf("bitmaps\\link90x90.bmp"),
-	surf2("bitmaps\\laura.bmp"),
-	willy(surf),
-	laura(surf2),
+	willy("bitmaps\\link90x90.bmp", CharacterLoads::Willy(), {10,100} ),
+	laura("bitmaps\\laura.bmp", CharacterLoads::Laura(), {10,200} ),
+	umisan("bitmaps\\umisan.bmp", CharacterLoads::Umisan(), {10,400}),
 	bitmapText(gfx),
 	soundHit(L"sounds\\hit.wav")
 {	
@@ -46,7 +46,7 @@ void Game::UpdateModel()
 {
 	float dt = ft.Mark();
 	laura.SetDirection({ 0,0 });
-	if (wnd.kbd.KeyIsPressed(0x44))
+	/*if (wnd.kbd.KeyIsPressed(0x44))
 	{
 		laura.SetDirection({ 1,0 });
 	}
@@ -61,24 +61,33 @@ void Game::UpdateModel()
 	if (wnd.kbd.KeyIsPressed(0x53))
 	{
 		laura.SetDirection({ 0,1 });
-	}
+	}*/
 
 	willy.SetDirection({ 0,0 });
+	umisan.SetDirection({ 0,0 });
 	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
 	{
 		willy.SetDirection({ 1,0 });
+		laura.SetDirection({ 1,0 });
+		umisan.SetDirection({ 1,0 });
 	}
 	if (wnd.kbd.KeyIsPressed(VK_LEFT))
 	{
 		willy.SetDirection({ -1,0 });
+		laura.SetDirection({ -1,0 });
+		umisan.SetDirection({ -1,0 });
 	}
 	if (wnd.kbd.KeyIsPressed(VK_UP))
 	{
 		willy.SetDirection({ 0,-1 });
+		laura.SetDirection({ 0,-1 });
+		umisan.SetDirection({ 0,-1 });
 	}
 	if (wnd.kbd.KeyIsPressed(VK_DOWN))
 	{
 		willy.SetDirection({ 0,1 });
+		laura.SetDirection({ 0,1 });
+		umisan.SetDirection({ 0,1 });
 	}
 	/**if (wnd.kbd.KeyIsPressed(0x51))
 	{
@@ -108,6 +117,7 @@ void Game::UpdateModel()
 
 	laura.Update(dt);
 	willy.Update(dt);
+	umisan.Update(dt);
 }
 
 void Game::ComposeFrame()
@@ -121,6 +131,7 @@ void Game::ComposeFrame()
 	gfx.DrawRectFilled({ {600,250},50,125 }, Colors::LightGray);
 	willy.Draw(gfx);
 	laura.Draw(gfx);
+	umisan.Draw(gfx);
 
 }
 

@@ -27,7 +27,6 @@
 #include "FrameTimer.h"
 #include "Vec2.h"
 #include "Character.h"
-#include "Character2.h"
 #include "BitmapText.h"
 #include "Sound.h"
 
@@ -49,11 +48,10 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
-	Surface surf;
-	Surface surf2;
 	FrameTimer ft;
 	Character willy;
-	Character2 laura;
+	Character laura;
+	Character umisan;
 	BitmapText bitmapText;
 	Sound soundHit;
 	

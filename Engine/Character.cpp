@@ -2,23 +2,7 @@
 #include "Character.h"
 #include "Vec2.h"
 #include "SpriteEffect.h"
-
-Character::Character(Surface& surf)
-	:
-	pos{ 10,300 },
-	vel(0.0f,1.0f),
-	spriteSheet(surf)
-{
-	animations.reserve(size_t(Sequence::Count));
-	for (int i = 0; i < 4; i++)
-	{
-		animations.emplace_back(Animation(90, 90*i , 90, 90, 4, 0.15f, surf));
-	}
-	for (int i = 0; i < 4; i++)
-	{
-		animations.emplace_back(Animation(0, 90*i , 90, 90, 1, 0.15f, surf));
-	}
-}
+#include "CharacterLoads.h"
 
 void Character::SetDirection(Vec2 dir)
 {
@@ -76,9 +60,9 @@ void Character::Update(float dt)
 
 void Character::Draw(Graphics& gfx)
 {
-	SpriteEffect::Ghost effectGhost{ Colors::Magenta };
-	SpriteEffect::Substitution effectSubst{ Colors::Magenta , Colors::Red };
-	SpriteEffect::SubstitutionGhost effectSubGhost{ Colors::Magenta , Colors::Red };
+	SpriteEffect::Ghost effectGhost{ chroma };
+	SpriteEffect::Substitution effectSubst{ chroma , Colors::Red };
+	SpriteEffect::SubstitutionGhost effectSubGhost{ chroma , Colors::Red };
 	if (hitActive)
 	{
 		animations[(int)sequence].Draw((Vei2)pos, gfx, effectSubst);

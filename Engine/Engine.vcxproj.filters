@@ -81,7 +81,7 @@
     <ClInclude Include="SpriteEffect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Character2.h">
+    <ClInclude Include="CharacterLoads.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -126,9 +126,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BitmapText.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Character2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

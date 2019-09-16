@@ -3,11 +3,20 @@
 #include "Animation.h"
 #include "Vec2.h"
 #include "Surface.h"
+#include <string>
 
 class Character
 {
 public:
-	Character(Surface& surf);
+	template<typename C>
+	Character(std::string fileName, C character, Vec2 startPos)
+		:
+		pos{ startPos },
+		vel(0.0f, 1.0f),
+		spriteSheet(Surface(fileName))
+	{
+		character(animations, spriteSheet, chroma);
+	}
 	void SetDirection(Vec2 dir);
 	void Update(float dt);
 	void Draw(Graphics& gfx);
@@ -29,7 +38,7 @@ public:
 		hitTime = hitDuration;
 	}
 
-private:
+public:
 	enum class Sequence
 	{
 		WalkLeft,
@@ -45,7 +54,8 @@ private:
 private:
 	Vec2 pos;
 	Vec2 vel;
-	Surface& spriteSheet;
+	Surface spriteSheet;
+	Color chroma;
 	std::vector<Animation> animations;
 	Sequence sequence = Sequence::StandForward;
 	float velocity = 140.0f;
