@@ -48,7 +48,10 @@ public:
 		const Vec2_<T> half(halfWidth, halfHeight);
 		return RectI(center - half, center + half);
 	}
-
+	Rect_ Move(Vei2 rhs)
+	{
+		return { left + rhs.x, right + rhs.x, top + rhs.y,bottom + rhs.y };
+	}
 	Rect_ GetExpanded(int offset) const
 	{
 		return Rect_(left - offset, right + offset, top - offset, bottom + offset);

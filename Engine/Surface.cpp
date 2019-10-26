@@ -53,17 +53,28 @@ Surface::Surface(const std::string& fileName)
 				if (topToBottom)
 				{
 					PutPixel(x, (height - 1) - y, Color(r, g, b));
+					PutPixel(1, (height-1)-y, Colors::Red);
+					PutPixel(width - 2, (height-1)-y, Colors::Red);
+					PutPixel(x, 1, Colors::Red);
+					PutPixel(x, height-1, Colors::Red);
 				}
 				else
 				{
 					PutPixel(x, y , Color(r, g, b));
+					PutPixel(1, y, Colors::Red);
+					PutPixel(width - 2, y, Colors::Red);
+					PutPixel(x, 1, Colors::Red);
+					PutPixel(x, height - 2, Colors::Red);
 				}
+
 			}
 			if (bmInfoHeader.biBitCount == 24)
 			{
 				file.seekg(padding, std::ios_base::cur);
 			}
 		}
+
+		
 	}
 }
 

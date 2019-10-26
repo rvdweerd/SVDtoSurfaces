@@ -137,6 +137,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="Attributes.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="CharacterLoads.h" />
     <ClInclude Include="ChiliException.h" />
@@ -150,6 +151,7 @@
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="MainWindow.h" />
+    <ClInclude Include="MemeFighter.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="Resource.h" />
@@ -242,6 +244,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Chili.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

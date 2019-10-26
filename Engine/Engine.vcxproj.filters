@@ -84,6 +84,12 @@
     <ClInclude Include="CharacterLoads.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Attributes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MemeFighter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">
@@ -146,5 +152,8 @@
     <Image Include="Chili.ico">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

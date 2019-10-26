@@ -21,15 +21,17 @@
 #include "MainWindow.h"
 #include "Game.h"
 #include "CharacterLoads.h"
+#include "MemeFighter.h"
 
 Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	willy("bitmaps\\link90x90.bmp", CharacterLoads::Willy(), {10,100} ),
-	laura("bitmaps\\laura.bmp", CharacterLoads::Laura(), {10,200} ),
-	umisan("bitmaps\\umisan.bmp", CharacterLoads::Umisan(), {10,400}),
 	bitmapText(gfx),
+	mf1(new MemeDwarf("Willy","bitmaps\\link90x90.bmp", CharacterLoads::Dwarf::Willy(), {10,100} , bitmapText)),
+	mf2(new MemeHuman("Laura","bitmaps\\laura.bmp", CharacterLoads::Human::Laura(), {10,200}, bitmapText)),
+	mf3(new MemeHuman("Umisan","bitmaps\\umisan.bmp", CharacterLoads::Human::Umisan(), {10,400}, bitmapText)),
+	//attributes(100,bitmapText),
 	soundHit(L"sounds\\hit.wav")
 {	
 }
@@ -44,51 +46,31 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	//MOVE CONTROL
 	float dt = ft.Mark();
-	laura.SetDirection({ 0,0 });
-	/*if (wnd.kbd.KeyIsPressed(0x44))
+	mf1->character->SetDirection(Vec2{ 0,0 });
 	{
-		laura.SetDirection({ 1,0 });
+		if (wnd.kbd.KeyIsPressed(0x44)) mf1->character->SetDirection({ 1,0 });
+		if (wnd.kbd.KeyIsPressed(0x41)) mf1->character->SetDirection({ -1,0 });
+		if (wnd.kbd.KeyIsPressed(0x57)) mf1->character->SetDirection({ 0,-1 });
+		if (wnd.kbd.KeyIsPressed(0x53)) mf1->character->SetDirection({ 0,1 });
 	}
-	if (wnd.kbd.KeyIsPressed(0x41))
+	mf2->character->SetDirection(Vec2{ 0,0 });
 	{
-		laura.SetDirection({ -1,0 });
+		if (wnd.kbd.KeyIsPressed(VK_RIGHT)) mf2->character->SetDirection({ 1,0 });
+		if (wnd.kbd.KeyIsPressed(VK_LEFT )) mf2->character->SetDirection({ -1,0 });
+		if (wnd.kbd.KeyIsPressed(VK_UP   )) mf2->character->SetDirection({ 0,-1 });
+		if (wnd.kbd.KeyIsPressed(VK_DOWN )) mf2->character->SetDirection({ 0,1 });
 	}
-	if (wnd.kbd.KeyIsPressed(0x57))
+	mf3->character->SetDirection(Vec2{ 0,0 });
 	{
-		laura.SetDirection({ 0,-1 });
+		if (wnd.kbd.KeyIsPressed(0x44)) mf3->character->SetDirection({ 1,0 });
+		if (wnd.kbd.KeyIsPressed(0x41)) mf3->character->SetDirection({ -1,0 });
+		if (wnd.kbd.KeyIsPressed(0x57)) mf3->character->SetDirection({ 0,-1 });
+		if (wnd.kbd.KeyIsPressed(0x53)) mf3->character->SetDirection({ 0,1 });
 	}
-	if (wnd.kbd.KeyIsPressed(0x53))
-	{
-		laura.SetDirection({ 0,1 });
-	}*/
 
-	willy.SetDirection({ 0,0 });
-	umisan.SetDirection({ 0,0 });
-	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
-	{
-		willy.SetDirection({ 1,0 });
-		laura.SetDirection({ 1,0 });
-		umisan.SetDirection({ 1,0 });
-	}
-	if (wnd.kbd.KeyIsPressed(VK_LEFT))
-	{
-		willy.SetDirection({ -1,0 });
-		laura.SetDirection({ -1,0 });
-		umisan.SetDirection({ -1,0 });
-	}
-	if (wnd.kbd.KeyIsPressed(VK_UP))
-	{
-		willy.SetDirection({ 0,-1 });
-		laura.SetDirection({ 0,-1 });
-		umisan.SetDirection({ 0,-1 });
-	}
-	if (wnd.kbd.KeyIsPressed(VK_DOWN))
-	{
-		willy.SetDirection({ 0,1 });
-		laura.SetDirection({ 0,1 });
-		umisan.SetDirection({ 0,1 });
-	}
+	//SPECIAL EFFECTS
 	/**if (wnd.kbd.KeyIsPressed(0x51))
 	{
 		willy.ActivateEffect();
@@ -99,25 +81,28 @@ void Game::UpdateModel()
 		const Keyboard::Event e = wnd.kbd.ReadKey();
 		if ( e.GetCode() == VK_SPACE )
 		{
+			mf1->character->TakeDamage(1);
 			if (e.IsRelease())
 			{
-				willy.SetSpeedFactor(1);
+				mf1->character->SetSpeedFactor(1);
 			}
 			else if (e.IsPress())
 			{
-				willy.SetSpeedFactor(2);
+				mf1->character->SetSpeedFactor(2);
 			}
 		}
 		if (e.GetCode() == 0x51 && e.IsPress() )
 		{
-			willy.ActivateHit();
+			mf1->character->ActivateHit();
+			mf1->character->TakeDamage(10);
 			soundHit.Play();
 		}
 	}
 
-	laura.Update(dt);
-	willy.Update(dt);
-	umisan.Update(dt);
+	//STATUS UPDATING
+	mf1->character->Update(dt);
+	mf2->character->Update(dt);
+	mf3->character->Update(dt);
 }
 
 void Game::ComposeFrame()
@@ -129,9 +114,11 @@ void Game::ComposeFrame()
 	gfx.DrawRectFilled({ {400,250},50,125 }, Colors::Yellow);
 	gfx.DrawRectFilled({ {500,250},50,125 }, Colors::Green);
 	gfx.DrawRectFilled({ {600,250},50,125 }, Colors::LightGray);
-	willy.Draw(gfx);
-	laura.Draw(gfx);
-	umisan.Draw(gfx);
+	mf1->character->Draw(gfx);
+	mf2->character->Draw(gfx);
+	mf3->character->Draw(gfx);
+	//attributes.Draw(gfx);
+	//attributes.TakeDamage(1);
 
 }
 

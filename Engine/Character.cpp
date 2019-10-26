@@ -2,7 +2,7 @@
 #include "Character.h"
 #include "Vec2.h"
 #include "SpriteEffect.h"
-#include "CharacterLoads.h"
+//#include "CharacterLoads.h"
 
 void Character::SetDirection(Vec2 dir)
 {
@@ -56,6 +56,7 @@ void Character::Update(float dt)
 			hitActive = false;
 		}
 	}
+	//attributes.TakeDamage(1);
 }
 
 void Character::Draw(Graphics& gfx)
@@ -73,8 +74,11 @@ void Character::Draw(Graphics& gfx)
 	}
 	else
 	{
-		animations[(int)sequence].Draw((Vei2)pos, gfx, effectGhost);
+		animations[(int)sequence].Draw((Vei2)pos, gfx, effectGhost);//SpriteEffect::Copy());
 
 	}
+	//attributes.Draw(Vei2(pos)+pos2topLeft,gfx);
+	//gfx.DrawRect(animations[0].frames[0].Move(Vei2(pos)), Colors::Red);
+	
 }
 

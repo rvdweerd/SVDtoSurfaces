@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Animation">
+    <Position X="2.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQAEAIAAAIAgAAgAAAAAAAAAAAAAAAAAgAAQAAAAA=</HashCode>
+      <FileName>Animation.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Icon" Collapsed="true">
+    <Position X="10.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Attributes.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Attributes" Collapsed="true">
+    <Position X="8.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAQAAAAAAAAAEAAgAAAAAg=</HashCode>
+      <FileName>Attributes.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Character">
+    <Position X="12.25" Y="5.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="Character::Sequence">
+        <TypeIdentifier>
+          <NewMemberFileName>Character.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AASAAEAAIAAAAgACACAAAIwAQgAAEAAAAQSggAAACQA=</HashCode>
+      <FileName>Character.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChiliException" Collapsed="true">
+    <Position X="14" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQEAAAACAAAEAAEAAAAAAAAAEAAAAAAABAAEAAQAAAA=</HashCode>
+      <FileName>ChiliException.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Color" Collapsed="true">
+    <Position X="7" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAkgQQAAAAAQAAAAAAAAAAQAAhqAEAAAA=</HashCode>
+      <FileName>Colors.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COMInitializer" Collapsed="true">
+    <Position X="8.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>COMInitializer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BitmapText" Collapsed="true">
+    <Position X="10.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABgAiAACAAAAAAAAAAAAQAAAAAAAAAAQAAE=</HashCode>
+      <FileName>BitmapText.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FrameTimer" Collapsed="true">
+    <Position X="9.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBAAAAAgA=</HashCode>
+      <FileName>FrameTimer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game" Collapsed="true">
+    <Position X="14" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAEAAAwAEAgAAAAQAAEAgAAAAACAEgAAAgAAA=</HashCode>
+      <FileName>Game.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphics" Collapsed="true">
+    <Position X="7" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QgCBEIAAIEAAACAAAAoAAAAASABAAAIAAAwgABAQBAM=</HashCode>
+      <FileName>Graphics.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Keyboard" Collapsed="true">
+    <Position X="10" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QgkgCQQAAAEKAABCAAAAIIAwgAAAAACAAAAoAAAJAQA=</HashCode>
+      <FileName>Keyboard.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HWNDKey" Collapsed="true">
+    <Position X="0.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAgAAAAgAAAAAAA=</HashCode>
+      <FileName>MainWindow.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainWindow" Collapsed="true">
+    <Position X="0.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAEAEEIABAIAEAQEAEAAAAAEAAAAAAAgAAEEAAA=</HashCode>
+      <FileName>MainWindow.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Mouse" Collapsed="true">
+    <Position X="15.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAICAAIAAAAQEBAEowwABIEEAAABABgAAQIYAA=</HashCode>
+      <FileName>Mouse.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rect_&lt;T&gt;" Collapsed="true">
+    <Position X="1.5" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CEAAAAAAAAAAABBAAACAAIhAIAAIAAAAAAAAAEAQgAA=</HashCode>
+      <FileName>Rect.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoundSystem" Collapsed="true">
+    <Position X="10.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAggEAAIAgABgAAAQCAAAAgAAAIgQAQAQAQAAIAA=</HashCode>
+      <FileName>Sound.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sound" Collapsed="true">
+    <Position X="7" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAMgACAAAIAAAAEAAAAAGAAAAAAAJAIhAAgAgAAIAE=</HashCode>
+      <FileName>Sound.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoundEffect" Collapsed="true">
+    <Position X="8.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAAAAEAABQgAAAAAAAAAA=</HashCode>
+      <FileName>SoundEffect.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Surface" Collapsed="true">
+    <Position X="15.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABIAAAAAAAAAQAQAIIAABEAAAAAAAAAAAgAEAAAAA=</HashCode>
+      <FileName>Surface.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Vec2_&lt;T&gt;" Collapsed="true">
+    <Position X="4.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAABAEAEAAAAQBAAAAAAAAAAABgAAAAAAA=</HashCode>
+      <FileName>Vec2.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IconLoads::Heart" Collapsed="true">
+    <Position X="8.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Attributes.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CharacterLoads::Willy" Collapsed="true">
+    <Position X="8.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CharacterLoads.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CharacterLoads::Laura" Collapsed="true">
+    <Position X="14" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CharacterLoads.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CharacterLoads::Umisan" Collapsed="true">
+    <Position X="7" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CharacterLoads.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpriteEffect::Copy" Collapsed="true">
+    <Position X="10.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SpriteEffect.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpriteEffect::Chroma" Collapsed="true">
+    <Position X="15.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAgAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SpriteEffect.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpriteEffect::Substitution" Collapsed="true">
+    <Position X="14" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACABABAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SpriteEffect.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpriteEffect::Ghost" Collapsed="true">
+    <Position X="15.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>SpriteEffect.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpriteEffect::SubstitutionGhost" Collapsed="true">
+    <Position X="14" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACABAAAAAAAAEAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SpriteEffect.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Typedef Name="RectI" Collapsed="true">
+    <Position X="1.5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Rect.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="WAVEFORMATEX" Collapsed="true">
+    <Position X="7" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sound.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Vec2" Collapsed="true">
+    <Position X="4.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vec2.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Vei2" Collapsed="true">
+    <Position X="4.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Vec2.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

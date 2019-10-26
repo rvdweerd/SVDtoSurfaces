@@ -29,6 +29,7 @@
 #include "Character.h"
 #include "BitmapText.h"
 #include "Sound.h"
+#include "MemeFighter.h"
 
 class Game
 {
@@ -48,11 +49,12 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
-	FrameTimer ft;
-	Character willy;
-	Character laura;
-	Character umisan;
 	BitmapText bitmapText;
+	FrameTimer ft;
+	MemeFighter* mf1;//willy
+	MemeFighter* mf2;//laura
+	MemeFighter* mf3;//umisan
+	//Attributes attributes;
 	Sound soundHit;
 	
 	/********************************/
