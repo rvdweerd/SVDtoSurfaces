@@ -77,7 +77,8 @@ private:
 		}
 		void TakeDamage(const int damage)
 		{
-			if (--hp < 0)
+			hp -= damage;
+			if (hp < 0)
 			{
 				hp = hp_max;
 			}

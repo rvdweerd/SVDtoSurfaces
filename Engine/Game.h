@@ -49,6 +49,7 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
+	Surface surf;
 	BitmapText bitmapText;
 	FrameTimer ft;
 	MemeFighter* mf1;//willy

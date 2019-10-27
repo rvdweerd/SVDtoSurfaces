@@ -48,6 +48,45 @@ public:
 	{
 		return personalSpace.Move(Vei2(pos));
 	}
+	void Scale(float scaling)
+	{
+		spriteSheet.Scale(scaling);
+		for (Animation& a : animations)
+		{
+			for (RectI& r : a.frames)
+			{
+				if (scaling > 1.0f)
+				{
+					r.left *= 2;
+					r.right *= 2;
+					r.top *= 2;
+					r.bottom *= 2;
+				}
+				else
+				{
+					r.left /= 2;
+					r.right /= 2;
+					r.top /= 2;
+					r.bottom /= 2;
+				}
+			}
+		}
+		if (scaling > 1.0f)
+		{
+			personalSpace.left *= 2;
+			personalSpace.right *= 2;
+			personalSpace.top *= 2;
+			personalSpace.bottom *= 2;
+		}
+		else
+		{
+			personalSpace.left /= 2;
+			personalSpace.right /= 2;
+			personalSpace.top /= 2;
+			personalSpace.bottom /= 2;
+		}
+
+	}
 
 public:
 	enum class Sequence

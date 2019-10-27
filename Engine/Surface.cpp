@@ -10,7 +10,6 @@ Surface::Surface(int width, int height)
 	height(height)
 {
 }
-
 Surface::Surface(const Surface& sourceSurface, float scaling)
 	:
 	pPixels( new Color[ int( sourceSurface.GetWidth()*scaling * sourceSurface.GetHeight()*scaling) ] ),
@@ -92,7 +91,6 @@ Surface::Surface(const std::string& fileName)
 		}
 	}
 }
-
 Surface::Surface(const Surface& source)
 	:
 	Surface(source.width, source.height)
@@ -104,13 +102,11 @@ Surface::Surface(const Surface& source)
 	}
 	//*this = source;
 }
-
 Surface::~Surface()
 {
 	delete[] pPixels;
 	pPixels = nullptr;
 }
-
 const Surface& Surface::operator=(const Surface& source)
 {
 	if (this != &source)
@@ -127,6 +123,68 @@ const Surface& Surface::operator=(const Surface& source)
 		}
 	}
 	return *this;
+}
+
+void Surface::Scale(const float scaling)
+{
+	if (scaling<0.999f)
+	{
+		int scalingI = 2;
+		int width_new = int(GetWidth() / scalingI);
+		int height_new = int(GetHeight() / scalingI);
+		Color* pNew = new Color[int(GetWidth() / scalingI * GetHeight() / scalingI)];
+		for (int y = 0; y < height_new; y++)
+		{
+			for (int x = 0; x < width_new; x++)
+			{
+				int R = 0; int G = 0; int B = 0;
+				for (int y_orig = int(y * scalingI); y_orig < int((y + 1) * scalingI); y_orig++)
+				{
+					for (int x_orig = int(x * scalingI); x_orig<int((x + 1) * scalingI); x_orig++)
+					{
+						R += GetPixel(x_orig, y_orig).GetR();
+						G += GetPixel(x_orig, y_orig).GetG();
+						B += GetPixel(x_orig, y_orig).GetB();
+					}
+				}
+				//PutPixel(x, y, Color(char(R / f / f), char(G / f / f), char(B / f / f)));
+				pNew[x + y * width_new] = Color(char(R / scalingI/scalingI), char(G / scalingI / scalingI), char(B / scalingI / scalingI));
+			}
+		}
+		delete pPixels;
+		pPixels = pNew;
+		pNew = nullptr;
+		width = width_new;
+		height = height_new;
+	}
+	else if (scaling > 1.001f)
+	{
+		//float f = 1 / scaling;
+		int scalingI = 2;
+		int width_new = int(GetWidth() * scalingI);
+		int height_new = int(GetHeight() * scalingI);
+		Color* pNew = new Color[int(GetWidth() * scalingI * GetHeight() * scalingI)];
+		for (int y_orig = 0; y_orig < GetHeight(); y_orig++)
+		{
+			for (int x_orig = 0; x_orig < GetWidth(); x_orig++)
+			{
+				for (int x = 0; x < scalingI; x++)
+				{
+					for (int y = 0; y < scalingI; y++)
+					{
+						pNew[(x_orig*scalingI+x) + (y_orig*scalingI+y) * width_new] = GetPixel(x_orig,y_orig);
+					}
+				}
+
+
+			}
+		}
+		delete pPixels;
+		pPixels = pNew;
+		pNew = nullptr;
+		width = width_new;
+		height = height_new;
+	}
 }
 
 void Surface::PutPixel(int x, int y, Color c)

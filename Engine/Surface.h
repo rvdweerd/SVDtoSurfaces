@@ -12,6 +12,7 @@ public:
 	Surface(const Surface&);
 	~Surface();
 	const Surface& operator=(const Surface&);
+	void Scale(const float scaling);
 	void PutPixel(int x, int y, Color c);
 	Color GetPixel(int x, int y) const;
 	int GetWidth() const;

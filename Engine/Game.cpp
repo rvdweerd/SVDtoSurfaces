@@ -27,6 +27,7 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
+	surf("bitmaps\\link90x90.bmp"),
 	bitmapText(gfx),
 	mf1(new MemeDwarf("Willy","bitmaps\\link90x90.bmp", CharacterLoads::Dwarf::Willy(), {10,100} , bitmapText)),
 	mf2(new MemeHuman("Laura","bitmaps\\laura.bmp", CharacterLoads::Human::Laura(), {10,200}, bitmapText)),
@@ -76,6 +77,7 @@ void Game::UpdateModel()
 	//	willy.ActivateEffect();
 	//	soundHit.Play();
 	//} 
+	/*
 	while (!wnd.kbd.KeyIsEmpty())
 	{
 		const Keyboard::Event e = wnd.kbd.ReadKey();
@@ -98,19 +100,61 @@ void Game::UpdateModel()
 			soundHit.Play();
 		}
 	}
-
+	*/
 	//STATUS UPDATING
 	mf1->character->Update(dt);
 	mf2->character->Update(dt);
 	mf3->character->Update(dt);
 	
-
+	/*if (wnd.kbd.KeyIsPressed(VK_HOME))
+	{
+		surf.Scale(1.002f);
+	}
+	if (wnd.kbd.KeyIsPressed(VK_END))
+	{
+		surf.Scale(0.998f);
+		//mf1->character->
+	}*/
+	while (!wnd.kbd.KeyIsEmpty())
+	{
+		const Keyboard::Event e = wnd.kbd.ReadKey();
+		if (e.GetCode() == VK_HOME && e.IsPress())
+		{
+			mf1->character->Scale(2.0f);
+			//surf.Scale(2.0f);
+		}
+		if (e.GetCode() == VK_END && e.IsPress())
+		{
+			mf1->character->Scale(0.5f); 
+			//surf.Scale(0.5f);
+		}
+		if (e.GetCode() == VK_SPACE)
+		{
+			mf1->character->TakeDamage(10);
+			if (e.IsRelease())
+			{
+				mf1->character->SetSpeedFactor(1);
+			}
+			else if (e.IsPress())
+			{
+				mf1->character->SetSpeedFactor(2);
+			}
+		}
+		if (e.GetCode() == 0x51 && e.IsPress())
+		{
+			mf1->character->ActivateHit();
+			mf1->character->TakeDamage(10);
+			soundHit.Play();
+		}
+	}
 }
 
 void Game::ComposeFrame()
 {
 	
-	bitmapText.DrawString(100, 130, Colors::White, "Fun Times", BitmapText::Font::FixedSys8x14);
+	bitmapText.DrawString(100, 130, Colors::White, "Fun Times (small font)", BitmapText::Font::FixedSys8x14);
+	bitmapText.DrawString(100, 100, Colors::White, "Fun Times (large font)", BitmapText::Font::FixedSys16x28);
+
 	//bitmapText.DrawString(wnd.mouse.GetPosX(),wnd.mouse.GetPosY(), Colors::Blue, "Weeeeee", BitmapText::Font::FixedSys16x28);
 	gfx.DrawRectFilled({ {200,250},50,125 }, Colors::Blue);
 	gfx.DrawRectFilled({ {300,250},50,125 }, Colors::Red);
@@ -123,7 +167,7 @@ void Game::ComposeFrame()
 	//attributes.Draw(gfx);
 	//attributes.TakeDamage(1);
 	
-
+	//gfx.DrawSprite(10, 10, surf, SpriteEffect::Copy());
 }
 
 

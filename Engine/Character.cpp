@@ -79,6 +79,5 @@ void Character::Draw(Graphics& gfx)
 	}
 	attributes.Draw(Vei2(pos)+pos2topLeft,gfx);
 	gfx.DrawRect(GetPersonalSpace(), Colors::Red);
-	
 }
 
