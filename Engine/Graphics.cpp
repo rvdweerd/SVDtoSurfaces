@@ -329,15 +329,20 @@ const Color Graphics::GetPixel (const int x, const int y) const
 
 void Graphics::DrawRect(RectI rect, Color c)
 {
-	for (int i = rect.left; i < rect.right; i++)
+	const int x_left = std::min(Graphics::ScreenWidth-1,std::max(0, rect.left));
+	const int x_right = std::max(0,std::min(Graphics::ScreenWidth-1, rect.right));
+	const int y_top = std::min(Graphics::ScreenHeight-1, std::max(0, rect.top));
+	const int y_bottom = std::max(0,std::min(Graphics::ScreenHeight-1, rect.bottom));
+	
+	for (int i = x_left; i < x_right; i++)
 	{
-		PutPixel(i, rect.top, c);
-		PutPixel(i, rect.bottom, c);
+		PutPixel(i, y_top, c);
+		PutPixel(i, y_bottom, c);
 	}
-	for (int j = rect.top; j < rect.bottom; j++) 
+	for (int j = y_top; j < y_bottom; j++) 
 	{
-		PutPixel(rect.left, j, c);
-		PutPixel(rect.right, j, c);
+		PutPixel(x_left, j, c);
+		PutPixel(x_right, j, c);
 	}
 }
 

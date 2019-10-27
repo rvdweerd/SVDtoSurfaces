@@ -9,7 +9,7 @@ namespace CharacterLoads
 		class Willy
 		{
 		public:
-			void operator()(std::vector<Animation>& animations, Surface& surf, Color& chroma, Vei2& pos2topLeft) const
+			void operator()(std::vector<Animation>& animations, Surface& surf, Color& chroma, Vei2& pos2topLeft, RectI& personalSpace) const
 			{
 				animations.reserve(size_t(Character::Sequence::Count));
 				for (int i = 0; i < 4; i++)
@@ -22,6 +22,7 @@ namespace CharacterLoads
 				}
 				chroma = Colors::Magenta;
 				pos2topLeft = { 5,-15 };
+				personalSpace = animations[4].frames[0];
 			}
 		private:
 
@@ -32,7 +33,7 @@ namespace CharacterLoads
 		class Laura
 		{
 		public:
-			void operator()(std::vector<Animation>& animations, Surface& surf, Color& chroma, Vei2& pos2topLeft) const
+			void operator()(std::vector<Animation>& animations, Surface& surf, Color& chroma, Vei2& pos2topLeft, RectI& personalSpace) const
 			{
 				animations.reserve(size_t(Character::Sequence::Count));
 				for (int i = 0; i < 4; i++)
@@ -46,6 +47,7 @@ namespace CharacterLoads
 				std::reverse(animations[1].frames.begin(), animations[1].frames.end());
 				chroma = Colors::White;
 				pos2topLeft = { 20,-25 };
+				personalSpace = animations[0].frames[0];
 			}
 		private:
 
@@ -53,7 +55,7 @@ namespace CharacterLoads
 		class Umisan
 		{
 		public:
-			void operator()(std::vector<Animation>& animations, Surface& surf, Color& chroma, Vei2& pos2topLeft) const
+			void operator()(std::vector<Animation>& animations, Surface& surf, Color& chroma, Vei2& pos2topLeft, RectI& personalSpace) const
 			{
 				animations.reserve(size_t(Character::Sequence::Count));
 				//LRBF
@@ -69,6 +71,8 @@ namespace CharacterLoads
 
 				chroma = Colors::Magenta;
 				pos2topLeft = { 5,-25 };
+				personalSpace = animations[3].frames[0];
+
 			}
 		private:
 

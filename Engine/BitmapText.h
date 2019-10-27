@@ -11,10 +11,12 @@ public:
 	enum class Font
 	{
 		FixedSys16x28=0,
+		FixedSys8x14,
 		Consolas13x24,
+		Consolas6x12BROKEN,
 		Count
 	};
-
+	
 public:
 	BitmapText(Graphics& gfx);
 	RectI GetChar(char ch, Font font);
@@ -25,7 +27,7 @@ private:
 	Graphics& gfx;
 	std::vector<Surface> fontSpriteSheets;
 	std::vector<std::string> fontFiles = { "bitmaps\\FixedSys16x28.bmp" , "bitmaps\\Consolas13x24.bmp" };
-	std::vector<Vei2> fontSizes = { {16,28} , {13,24} };
+	std::vector<Vei2> fontSizes = { {16,28}, {8,14} , {13,24}, {6,12} };
 
 
 };

@@ -77,8 +77,8 @@ void Character::Draw(Graphics& gfx)
 		animations[(int)sequence].Draw((Vei2)pos, gfx, effectGhost);//SpriteEffect::Copy());
 
 	}
-	//attributes.Draw(Vei2(pos)+pos2topLeft,gfx);
-	//gfx.DrawRect(animations[0].frames[0].Move(Vei2(pos)), Colors::Red);
+	attributes.Draw(Vei2(pos)+pos2topLeft,gfx);
+	gfx.DrawRect(GetPersonalSpace(), Colors::Red);
 	
 }
 

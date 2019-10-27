@@ -18,7 +18,7 @@ public:
 		spriteSheet(Surface(fileName)),
 		attributes(100,bmtext)
 	{
-		character(animations, spriteSheet, chroma, pos2topLeft);
+		character(animations, spriteSheet, chroma, pos2topLeft, personalSpace);
 	}
 	void SetDirection(Vec2 dir);
 	void Update(float dt);
@@ -44,6 +44,10 @@ public:
 		hitActive = true;
 		hitTime = hitDuration;
 	}
+	RectI GetPersonalSpace() 
+	{
+		return personalSpace.Move(Vei2(pos));
+	}
 
 public:
 	enum class Sequence
@@ -63,6 +67,7 @@ private:
 	Vei2 pos2topLeft;
 	Vec2 pos;
 	Vec2 vel;
+	RectI personalSpace = { 0,0,0,0 };
 	Surface spriteSheet;
 	Color chroma;
 	std::vector<Animation> animations;

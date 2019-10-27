@@ -31,7 +31,6 @@ Game::Game(MainWindow& wnd)
 	mf1(new MemeDwarf("Willy","bitmaps\\link90x90.bmp", CharacterLoads::Dwarf::Willy(), {10,100} , bitmapText)),
 	mf2(new MemeHuman("Laura","bitmaps\\laura.bmp", CharacterLoads::Human::Laura(), {10,200}, bitmapText)),
 	mf3(new MemeHuman("Umisan","bitmaps\\umisan.bmp", CharacterLoads::Human::Umisan(), {10,400}, bitmapText)),
-	//attributes(100,bitmapText),
 	soundHit(L"sounds\\hit.wav")
 {	
 }
@@ -46,6 +45,7 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	
 	//MOVE CONTROL
 	float dt = ft.Mark();
 	mf1->character->SetDirection(Vec2{ 0,0 });
@@ -64,18 +64,18 @@ void Game::UpdateModel()
 	}
 	mf3->character->SetDirection(Vec2{ 0,0 });
 	{
-		if (wnd.kbd.KeyIsPressed(0x44)) mf3->character->SetDirection({ 1,0 });
-		if (wnd.kbd.KeyIsPressed(0x41)) mf3->character->SetDirection({ -1,0 });
-		if (wnd.kbd.KeyIsPressed(0x57)) mf3->character->SetDirection({ 0,-1 });
-		if (wnd.kbd.KeyIsPressed(0x53)) mf3->character->SetDirection({ 0,1 });
+		if (wnd.kbd.KeyIsPressed(0x4C)) mf3->character->SetDirection({ 1,0 });
+		if (wnd.kbd.KeyIsPressed(0x4A)) mf3->character->SetDirection({ -1,0 });
+		if (wnd.kbd.KeyIsPressed(0x49)) mf3->character->SetDirection({ 0,-1 });
+		if (wnd.kbd.KeyIsPressed(0x4B)) mf3->character->SetDirection({ 0,1 });
 	}
 
 	//SPECIAL EFFECTS
-	/**if (wnd.kbd.KeyIsPressed(0x51))
-	{
-		willy.ActivateEffect();
-		soundHit.Play();
-	} */
+	//if (wnd.kbd.KeyIsPressed(0x51))
+	//{
+	//	willy.ActivateEffect();
+	//	soundHit.Play();
+	//} 
 	while (!wnd.kbd.KeyIsEmpty())
 	{
 		const Keyboard::Event e = wnd.kbd.ReadKey();
@@ -103,11 +103,14 @@ void Game::UpdateModel()
 	mf1->character->Update(dt);
 	mf2->character->Update(dt);
 	mf3->character->Update(dt);
+	
+
 }
 
 void Game::ComposeFrame()
 {
-	bitmapText.DrawString(100, 130, Colors::White, "Fun Times", BitmapText::Font::Consolas13x24);
+	
+	bitmapText.DrawString(100, 130, Colors::White, "Fun Times", BitmapText::Font::FixedSys8x14);
 	//bitmapText.DrawString(wnd.mouse.GetPosX(),wnd.mouse.GetPosY(), Colors::Blue, "Weeeeee", BitmapText::Font::FixedSys16x28);
 	gfx.DrawRectFilled({ {200,250},50,125 }, Colors::Blue);
 	gfx.DrawRectFilled({ {300,250},50,125 }, Colors::Red);
@@ -119,6 +122,7 @@ void Game::ComposeFrame()
 	mf3->character->Draw(gfx);
 	//attributes.Draw(gfx);
 	//attributes.TakeDamage(1);
+	
 
 }
 

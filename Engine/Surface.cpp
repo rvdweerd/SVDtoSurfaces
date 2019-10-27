@@ -11,6 +11,32 @@ Surface::Surface(int width, int height)
 {
 }
 
+Surface::Surface(const Surface& sourceSurface, float scaling)
+	:
+	pPixels( new Color[ int( sourceSurface.GetWidth()*scaling * sourceSurface.GetHeight()*scaling) ] ),
+	width(int(sourceSurface.GetWidth()* scaling)),
+	height(int(sourceSurface.GetHeight()* scaling))
+{
+	float f = 1 / scaling;
+	for (int y = 0; y < height; y++)
+	{
+		for (int x = 0; x < width; x++)
+		{
+			int R = 0; int G = 0; int B = 0;
+			for (int y_orig = int(y * f); y_orig < int((y + 1) * f); y_orig++)
+			{
+				for (int x_orig = int(x * f); x_orig<int((x + 1) * f); x_orig++)
+				{
+					R += sourceSurface.GetPixel(x_orig, y_orig).GetR();
+					G += sourceSurface.GetPixel(x_orig, y_orig).GetG();
+					B += sourceSurface.GetPixel(x_orig, y_orig).GetB();
+				}
+			}
+			PutPixel(x, y, Color(char(R / f / f), char(G / f / f), char(B / f / f)));
+		}
+	}
+}
+
 Surface::Surface(const std::string& fileName)
 {
 	std::ifstream file(fileName, std::ios::binary);
@@ -53,28 +79,17 @@ Surface::Surface(const std::string& fileName)
 				if (topToBottom)
 				{
 					PutPixel(x, (height - 1) - y, Color(r, g, b));
-					PutPixel(1, (height-1)-y, Colors::Red);
-					PutPixel(width - 2, (height-1)-y, Colors::Red);
-					PutPixel(x, 1, Colors::Red);
-					PutPixel(x, height-1, Colors::Red);
 				}
 				else
 				{
 					PutPixel(x, y , Color(r, g, b));
-					PutPixel(1, y, Colors::Red);
-					PutPixel(width - 2, y, Colors::Red);
-					PutPixel(x, 1, Colors::Red);
-					PutPixel(x, height - 2, Colors::Red);
 				}
-
 			}
 			if (bmInfoHeader.biBitCount == 24)
 			{
 				file.seekg(padding, std::ios_base::cur);
 			}
 		}
-
-		
 	}
 }
 
@@ -146,5 +161,6 @@ RectI Surface::GetRect() const
 {
 	return { {0,0},width, height};
 }
+
 
 

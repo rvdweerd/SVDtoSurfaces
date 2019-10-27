@@ -7,10 +7,14 @@ BitmapText::BitmapText(Graphics& gfx)
 	:
 	gfx(gfx)
 {
-	for (int i = 0; i < (int)Font::Count; i++)
-	{
-		fontSpriteSheets.emplace_back(Surface(fontFiles[i]));
-	}
+	//for (int i = 0; i < (int)Font::Count; i++)
+	//{
+	//	fontSpriteSheets.emplace_back(Surface(fontFiles[i]));
+	//}
+	fontSpriteSheets.emplace_back(Surface(fontFiles[0]));
+	fontSpriteSheets.emplace_back(Surface(fontFiles[0]),0.5f);
+	fontSpriteSheets.emplace_back(Surface(fontFiles[1]));
+	fontSpriteSheets.emplace_back(Surface(fontFiles[1]), 0.5f);
 }
 
 RectI BitmapText::GetChar(char ch, Font font)

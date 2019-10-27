@@ -48,7 +48,7 @@ public:
 	void Draw(const Vei2& pos, Graphics& gfx) const
 	{
 		health.Draw(pos, gfx);
-		bmtext.DrawString(pos.x+25, pos.y, Colors::White, "[hp]"+std::to_string(health.GetHp()), BitmapText::Font::Consolas13x24);
+		bmtext.DrawString(pos.x+25, pos.y, Colors::White, "[hp]"+std::to_string(health.GetHp()), BitmapText::Font::FixedSys8x14);
 		//bmtext.DrawString(pos.x + 25, pos.y+20, Colors::White, std::to_string(sizeof bmtext), BitmapText::Font::Consolas13x24);
 	}
 	void TakeDamage(const int damage)

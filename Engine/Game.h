@@ -54,8 +54,6 @@ private:
 	MemeFighter* mf1;//willy
 	MemeFighter* mf2;//laura
 	MemeFighter* mf3;//umisan
-	//Attributes attributes;
 	Sound soundHit;
-	
 	/********************************/
 };
