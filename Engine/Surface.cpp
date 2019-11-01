@@ -5,7 +5,7 @@
 
 Surface::Surface(int width, int height)
 	:
-	pPixels(new Color[width*height]),
+	pPixels(std::make_unique<Color[]>(width*height) ),
 	width(width),
 	height(height)
 {
@@ -51,7 +51,7 @@ Surface::Surface(const std::string& fileName)
 	width = bmInfoHeader.biWidth;
 	height = bmInfoHeader.biHeight;
 	
-	pPixels = new Color[width * std::abs(height) ];
+	pPixels = std::make_unique<Color[]>( width * std::abs(height) ) ;
 	file.seekg( bmFileHeader.bfOffBits);
 	const int padding = (4 - (width * 3) % 4) % 4;
 	bool topToBottom = true;
@@ -100,26 +100,21 @@ Surface::Surface(const Surface& source)
 	{
 		this->pPixels[i] = source.pPixels[i];
 	}
-	//*this = source;
 }
-Surface::~Surface()
-{
-	delete[] pPixels;
-	pPixels = nullptr;
-}
+
 const Surface& Surface::operator=(const Surface& source)
 {
 	if (this != &source)
 	{
-		this->width = source.width;
-		this->height = source.height;
-		delete this->pPixels;
-		this->pPixels = new Color[width*height];
+		width = source.width;
+		height = source.height;
 		
+		//pPixels = std::move(source.pPixels);
+		pPixels = std::make_unique<Color[]>(width*height);
 		int nPixels = width * height;
 		for (int i = 0; i < nPixels; i++)
 		{
-			this->pPixels[i] = source.pPixels[i];
+			pPixels[i] = source.pPixels[i];
 		}
 	}
 	return *this;
@@ -132,7 +127,7 @@ void Surface::Scale(const float scaling)
 		int scalingI = 2;
 		int width_new = int(GetWidth() / scalingI);
 		int height_new = int(GetHeight() / scalingI);
-		Color* pNew = new Color[int(GetWidth() / scalingI * GetHeight() / scalingI)];
+		auto pNew = std::make_unique<Color[]>(int(GetWidth() / scalingI * GetHeight() / scalingI));
 		for (int y = 0; y < height_new; y++)
 		{
 			for (int x = 0; x < width_new; x++)
@@ -147,23 +142,19 @@ void Surface::Scale(const float scaling)
 						B += GetPixel(x_orig, y_orig).GetB();
 					}
 				}
-				//PutPixel(x, y, Color(char(R / f / f), char(G / f / f), char(B / f / f)));
 				pNew[x + y * width_new] = Color(char(R / scalingI/scalingI), char(G / scalingI / scalingI), char(B / scalingI / scalingI));
 			}
 		}
-		delete pPixels;
-		pPixels = pNew;
-		pNew = nullptr;
+		pPixels = std::move(pNew);
 		width = width_new;
 		height = height_new;
 	}
 	else if (scaling > 1.001f)
 	{
-		//float f = 1 / scaling;
 		int scalingI = 2;
 		int width_new = int(GetWidth() * scalingI);
 		int height_new = int(GetHeight() * scalingI);
-		Color* pNew = new Color[int(GetWidth() * scalingI * GetHeight() * scalingI)];
+		auto pNew = std::make_unique<Color[]>(int(GetWidth() * scalingI * GetHeight() * scalingI));
 		for (int y_orig = 0; y_orig < GetHeight(); y_orig++)
 		{
 			for (int x_orig = 0; x_orig < GetWidth(); x_orig++)
@@ -179,9 +170,7 @@ void Surface::Scale(const float scaling)
 
 			}
 		}
-		delete pPixels;
-		pPixels = pNew;
-		pNew = nullptr;
+		pPixels = std::move(pNew);
 		width = width_new;
 		height = height_new;
 	}

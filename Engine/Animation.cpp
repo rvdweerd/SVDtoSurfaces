@@ -27,7 +27,7 @@ void Animation::Update(float dt)
 
 void Animation::Advance()
 {
-	if (++iCurrentFrame >= frames.size())
+	if (++iCurrentFrame >= int(frames.size()))
 	{
 		iCurrentFrame = 0;
 	}

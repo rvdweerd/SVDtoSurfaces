@@ -120,12 +120,12 @@ void Game::UpdateModel()
 		const Keyboard::Event e = wnd.kbd.ReadKey();
 		if (e.GetCode() == VK_HOME && e.IsPress())
 		{
-			mf1->character->Scale(2.0f);
+			mf3->character->Scale(2.0f);
 			//surf.Scale(2.0f);
 		}
 		if (e.GetCode() == VK_END && e.IsPress())
 		{
-			mf1->character->Scale(0.5f); 
+			mf3->character->Scale(0.5f); 
 			//surf.Scale(0.5f);
 		}
 		if (e.GetCode() == VK_SPACE)
