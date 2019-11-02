@@ -46,7 +46,11 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	
+	Surface a(10,10);
+	Surface b = a;
+	Surface c(0, 0);
+	c = std::move(a);
+
 	//MOVE CONTROL
 	float dt = ft.Mark();
 	mf1->character->SetDirection(Vec2{ 0,0 });
