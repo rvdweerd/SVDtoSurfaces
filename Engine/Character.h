@@ -7,6 +7,18 @@
 #include "BitmapText.h"
 #include "Attributes.h"
 
+class CharacterGraphics
+{
+private:
+	Vei2 pos2topLeft;
+	Surface spriteSheet;
+	Surface spriteSheet_orig;
+	float scaleFactor;
+	Color chroma;
+	std::vector<Animation> animations;
+	RectI personalSpace = { 0,0,0,0 };
+};
+
 class Character
 {
 public:
@@ -43,6 +55,14 @@ public:
 	{
 		hitActive = true;
 		hitTime = hitDuration;
+	}
+	void Activate() 
+	{
+		active = true;
+	}
+	void DeActivate()
+	{
+		active = false;
 	}
 	RectI GetPersonalSpace() 
 	{
@@ -118,4 +138,5 @@ private:
 	bool hitActive = false;
 	float hitTime = 0.0f;
 	Attributes attributes;
+	bool active = false;
 };

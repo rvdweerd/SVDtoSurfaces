@@ -52,9 +52,9 @@ private:
 	Surface surf;
 	BitmapText bitmapText;
 	FrameTimer ft;
-	MemeFighter* mf1;//willy
-	MemeFighter* mf2;//laura
-	MemeFighter* mf3;//umisan
+	std::unique_ptr<MemeFighter> mf1;//willy
+	std::unique_ptr<MemeFighter> mf2;//laura
+	std::unique_ptr<MemeFighter> mf3;//umisan
 	Sound soundHit;
 	/********************************/
 };
