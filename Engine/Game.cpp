@@ -173,12 +173,26 @@ void Game::ComposeFrame()
 	if (mf1->character->GetPersonalSpace().IsOverlappingWith(mf2->character->GetPersonalSpace()))
 	{
 		bitmapText.DrawString(100, 100, Colors::White, "WE HAVE AN OVERLAP", BitmapText::Font::FixedSys16x28);
+		mf1->character->Activate();
+		mf2->character->Activate();
+		gfx.DrawRectFilled(mf1->character->GetPersonalSpace().GetOverlap(mf2->character->GetPersonalSpace()), Colors::Red);
 	}
-	else
+	if (mf1->character->GetPersonalSpace().IsOverlappingWith(mf3->character->GetPersonalSpace()))
 	{
-		bitmapText.DrawString(100, 100, Colors::White, "...", BitmapText::Font::FixedSys16x28);
+		bitmapText.DrawString(100, 100, Colors::White, "WE HAVE AN OVERLAP", BitmapText::Font::FixedSys16x28);
+		mf1->character->Activate();
+		mf3->character->Activate();
+		gfx.DrawRectFilled(mf1->character->GetPersonalSpace().GetOverlap(mf3->character->GetPersonalSpace()), Colors::Red);
 	}
-	
+	if (mf2->character->GetPersonalSpace().IsOverlappingWith(mf3->character->GetPersonalSpace()))
+	{
+		bitmapText.DrawString(100, 100, Colors::White, "WE HAVE AN OVERLAP", BitmapText::Font::FixedSys16x28);
+		mf2->character->Activate();
+		mf3->character->Activate();
+		gfx.DrawRectFilled(mf2->character->GetPersonalSpace().GetOverlap(mf3->character->GetPersonalSpace()), Colors::Red);
+	}
+
+
 	//bitmapText.DrawString(wnd.mouse.GetPosX(),wnd.mouse.GetPosY(), Colors::Blue, "Weeeeee", BitmapText::Font::FixedSys16x28);
 	gfx.DrawRectFilled({ {200,250},50,125 }, Colors::Blue);
 	gfx.DrawRectFilled({ {300,250},50,125 }, Colors::Red);
@@ -188,6 +202,13 @@ void Game::ComposeFrame()
 	mf1->character->Draw(gfx);
 	mf2->character->Draw(gfx);
 	mf3->character->Draw(gfx);
+
+	Vei2 p1 = Vei2( mf1->character->GetPersonalSpace().left, mf1->character->GetPersonalSpace().top );
+	Vei2 p2 = Vei2( mf2->character->GetPersonalSpace().left, mf2->character->GetPersonalSpace().top );
+	Vei2 p3 = Vei2( mf3->character->GetPersonalSpace().left, mf3->character->GetPersonalSpace().top );
+	//DRAW LINE
+
+
 	//attributes.Draw(gfx);
 	//attributes.TakeDamage(1);
 	

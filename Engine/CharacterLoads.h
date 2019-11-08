@@ -22,7 +22,11 @@ namespace CharacterLoads
 				}
 				chroma = Colors::Magenta;
 				pos2topLeft = { 5,-15 };
-				personalSpace = animations[4].frames[0];
+				personalSpace = {
+					animations[4].frames[0].left+16,
+					animations[4].frames[0].right-20,
+					animations[4].frames[0].top+10,
+					animations[4].frames[0].bottom-10 };
 			}
 		private:
 
@@ -47,7 +51,7 @@ namespace CharacterLoads
 				std::reverse(animations[1].frames.begin(), animations[1].frames.end());
 				chroma = Colors::White;
 				pos2topLeft = { 20,-25 };
-				personalSpace = animations[0].frames[0];
+				personalSpace = { animations[0].frames[0].left+35 , animations[0].frames[0].right-35,animations[0].frames[0].top, animations[0].frames[0].bottom };
 			}
 		private:
 
