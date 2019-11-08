@@ -149,25 +149,73 @@ void Game::UpdateModel()
 	}
 }
 
+Vei2 Intersection(Vei2 p1, Vei2 p2, Vei2 p3, Vei2 p4)
+{
+	//bring to base
+	//Vei2 p1_orig = p1;
+	p2 -= p1;
+	p3 -= p1;
+	p4 -= p1;
+	//p1 -= p1;
+
+
+	float y0 = float(-p4.x * p3.y + p3.x * p4.y) / float(p3.x - p4.x);
+	float alpha = float(p3.y - p4.y) / float(p3.x - p4.x);
+	float x_ = float(y0 * p2.x) / float(p2.y - alpha * p2.x);
+	float y_ = float(y0 * p2.y) / float(p2.y - alpha * p2.x);
+
+
+
+	return ( Vei2{ int(x_) , int(y_) } + p1 );
+}
+
 void Game::ComposeFrame()
 {
-	
-	bitmapText.DrawString(100, 130, Colors::White, "Fun Times (small font)", BitmapText::Font::FixedSys8x14);
-	bitmapText.DrawString(100, 100, Colors::White, "Fun Times (large font)", BitmapText::Font::FixedSys16x28);
+	//bitmapText.DrawString(100, 130, Colors::White, "Fun Times (small font)", BitmapText::Font::FixedSys8x14);
+	//bitmapText.DrawString(100, 100, Colors::White, "Fun Times (large font)", BitmapText::Font::FixedSys16x28);
 
 	//bitmapText.DrawString(wnd.mouse.GetPosX(),wnd.mouse.GetPosY(), Colors::Blue, "Weeeeee", BitmapText::Font::FixedSys16x28);
-	gfx.DrawRectFilled({ {200,250},50,125 }, Colors::Blue);
-	gfx.DrawRectFilled({ {300,250},50,125 }, Colors::Red);
-	gfx.DrawRectFilled({ {400,250},50,125 }, Colors::Yellow);
-	gfx.DrawRectFilled({ {500,250},50,125 }, Colors::Green);
-	gfx.DrawRectFilled({ {600,250},50,125 }, Colors::LightGray);
-	mf1->character->Draw(gfx);
-	mf2->character->Draw(gfx);
-	mf3->character->Draw(gfx);
+	//gfx.DrawRectFilled({ {200,250},50,125 }, Colors::Blue);
+	//gfx.DrawRectFilled({ {300,250},50,125 }, Colors::Red);
+	//gfx.DrawRectFilled({ {400,250},50,125 }, Colors::Yellow);
+	//gfx.DrawRectFilled({ {500,250},50,125 }, Colors::Green);
+	//gfx.DrawRectFilled({ {600,250},50,125 }, Colors::LightGray);
+	//mf1->character->Draw(gfx);
+	//mf2->character->Draw(gfx);
+	//mf3->character->Draw(gfx);
 	//attributes.Draw(gfx);
 	//attributes.TakeDamage(1);
-	
+	//gfx.DrawLine(p1, Vei2(wnd.mouse.GetPosX(), wnd.mouse.GetPosY()), Colors::Magenta);
 	//gfx.DrawSprite(10, 10, surf, SpriteEffect::Copy());
+
+	/*
+	auto p1 = mf1->character->GetPersonalSpace().GetCenter();
+	auto p2 = mf2->character->GetPersonalSpace().GetCenter();
+	auto p3 = mf3->character->GetPersonalSpace().GetCenter();
+	PixelStep::Pair pair1(p1, p2);
+	PixelStep::Pair pair2(p1, p3);
+	PixelStep::Pair pair3(p2, p3);
+	gfx.DrawLine(pair1, Colors::Red);
+	gfx.DrawLine(pair2, Colors::Red);
+	gfx.DrawLine(pair3, Colors::Red);
+	Vei2 middle1 = pair1.MidPoint();
+	Vei2 middle2 = pair2.MidPoint();
+	Vei2 middle3 = pair3.MidPoint();
+	bitmapText.DrawString(middle1.x, middle1.y, Colors::Magenta, std::to_string(pair1.GetDistance()), BitmapText::Font::FixedSys8x14);
+	bitmapText.DrawString(middle2.x, middle2.y, Colors::Magenta, std::to_string(pair2.GetDistance()), BitmapText::Font::FixedSys8x14);
+	bitmapText.DrawString(middle3.x, middle3.y, Colors::Magenta, std::to_string(pair3.GetDistance()), BitmapText::Font::FixedSys8x14);
+	*/
+	Vei2 p1(10, 20);
+	Vei2 p2(wnd.mouse.GetPosX(), wnd.mouse.GetPosY());
+	Vei2 p3(30, 80);
+	Vei2 p4(140, 10);
+	PixelStep::Pair pair1(p1, p2);
+	PixelStep::Pair pair2(p3, p4);
+	gfx.DrawLine(pair1, Colors::Red);
+	gfx.DrawLine(pair2, Colors::Red);
+	Vei2 q = Intersection(p1, p2, p3, p4);
+	gfx.DrawLine(p1, q, Colors::White);
+	gfx.DrawLine(p3, q, Colors::White);
 }
 
 
