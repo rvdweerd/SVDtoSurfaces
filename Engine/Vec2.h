@@ -77,6 +77,7 @@ public:
 		//return temp;
 		return *this = GetNormalized();
 	}
+	
 	/*Vec2_ operator-() const
 	{
 		return Vec2_(-x, -y);
@@ -84,7 +85,11 @@ public:
 	bool operator==(Vec2_ rhs);
 	bool operator!=(Vec2_ rhs);
 	bool operator>(Vec2_ rhs);
-	bool operator<(Vec2_ rhs);
+	//bool operator<(Vec2_ rhs);
+	bool operator<(const Vec2_& rhs) const
+	{
+		return (x <= rhs.x);
+	}
 	bool operator>=(Vec2_ rhs);
 	bool operator<=(Vec2_ rhs);
 	
