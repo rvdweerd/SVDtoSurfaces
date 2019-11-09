@@ -29,9 +29,9 @@ Game::Game(MainWindow& wnd)
 	gfx(wnd),
 	surf("bitmaps\\link90x90.bmp"),
 	bitmapText(gfx),
-	mf1(new MemeDwarf("Willy","bitmaps\\link90x90.bmp", CharacterLoads::Dwarf::Willy(), {10,100} , bitmapText)),
-	mf2(new MemeHuman("Laura","bitmaps\\laura.bmp", CharacterLoads::Human::Laura(), {10,200}, bitmapText)),
-	mf3(new MemeHuman("Umisan","bitmaps\\umisan.bmp", CharacterLoads::Human::Umisan(), {10,400}, bitmapText)),
+	mf1(std::make_unique<MemeFighter>(MemeDwarf("Willy","bitmaps\\link90x90.bmp", CharacterLoads::Dwarf::Willy(), {10,100} , bitmapText))),
+	mf2(std::make_unique<MemeFighter>(MemeHuman("Laura","bitmaps\\laura.bmp", CharacterLoads::Human::Laura(), {10,200}, bitmapText))),
+	mf3(std::make_unique<MemeFighter>(MemeHuman("Umisan","bitmaps\\umisan.bmp", CharacterLoads::Human::Umisan(), {10,400}, bitmapText))),
 	soundHit(L"sounds\\hit.wav")
 {	
 }
@@ -46,29 +46,46 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	
 	//MOVE CONTROL
 	float dt = ft.Mark();
 	mf1->character->SetDirection(Vec2{ 0,0 });
 	{
-		if (wnd.kbd.KeyIsPressed(0x44)) mf1->character->SetDirection({ 1,0 });
-		if (wnd.kbd.KeyIsPressed(0x41)) mf1->character->SetDirection({ -1,0 });
-		if (wnd.kbd.KeyIsPressed(0x57)) mf1->character->SetDirection({ 0,-1 });
-		if (wnd.kbd.KeyIsPressed(0x53)) mf1->character->SetDirection({ 0,1 });
+		bool act = false;
+		if (wnd.kbd.KeyIsPressed(0x44)) { mf1->character->SetDirection({ 1,0 });	act = true;}
+		if (wnd.kbd.KeyIsPressed(0x41)) {mf1->character->SetDirection({ -1,0 });	act = true;}
+		if (wnd.kbd.KeyIsPressed(0x57)) {mf1->character->SetDirection({ 0,-1 });	act = true;}
+		if (wnd.kbd.KeyIsPressed(0x53)) {mf1->character->SetDirection({ 0,1 });		act = true;}
+		if (act) {
+			mf1->character->Activate();
+			mf2->character->DeActivate();
+			mf3->character->DeActivate();
+		}
 	}
 	mf2->character->SetDirection(Vec2{ 0,0 });
 	{
-		if (wnd.kbd.KeyIsPressed(VK_RIGHT)) mf2->character->SetDirection({ 1,0 });
-		if (wnd.kbd.KeyIsPressed(VK_LEFT )) mf2->character->SetDirection({ -1,0 });
-		if (wnd.kbd.KeyIsPressed(VK_UP   )) mf2->character->SetDirection({ 0,-1 });
-		if (wnd.kbd.KeyIsPressed(VK_DOWN )) mf2->character->SetDirection({ 0,1 });
+		bool act = false;
+		if (wnd.kbd.KeyIsPressed(VK_RIGHT)) {mf2->character->SetDirection({ 1,0 });		act = true; }
+		if (wnd.kbd.KeyIsPressed(VK_LEFT )) {mf2->character->SetDirection({ -1,0 });	act = true; }
+		if (wnd.kbd.KeyIsPressed(VK_UP   )) {mf2->character->SetDirection({ 0,-1 });	act = true; }
+		if (wnd.kbd.KeyIsPressed(VK_DOWN )) {mf2->character->SetDirection({ 0,1 });		act = true; }
+		if (act) {
+			mf1->character->DeActivate();
+			mf2->character->Activate();
+			mf3->character->DeActivate();
+		}
 	}
 	mf3->character->SetDirection(Vec2{ 0,0 });
 	{
-		if (wnd.kbd.KeyIsPressed(0x4C)) mf3->character->SetDirection({ 1,0 });
-		if (wnd.kbd.KeyIsPressed(0x4A)) mf3->character->SetDirection({ -1,0 });
-		if (wnd.kbd.KeyIsPressed(0x49)) mf3->character->SetDirection({ 0,-1 });
-		if (wnd.kbd.KeyIsPressed(0x4B)) mf3->character->SetDirection({ 0,1 });
+		bool act = false;
+		if (wnd.kbd.KeyIsPressed(0x4C)) {mf3->character->SetDirection({ 1,0 });		act = true;}
+		if (wnd.kbd.KeyIsPressed(0x4A)) { mf3->character->SetDirection({ -1,0 });	act = true; }
+		if (wnd.kbd.KeyIsPressed(0x49)) { mf3->character->SetDirection({ 0,-1 });	act = true; }
+		if (wnd.kbd.KeyIsPressed(0x4B)) { mf3->character->SetDirection({ 0,1 });	act = true; }
+		if (act) {
+			mf1->character->DeActivate();
+			mf2->character->DeActivate();
+			mf3->character->Activate();
+		}
 	}
 
 	//SPECIAL EFFECTS
@@ -175,14 +192,19 @@ void Game::ComposeFrame()
 	//bitmapText.DrawString(100, 100, Colors::White, "Fun Times (large font)", BitmapText::Font::FixedSys16x28);
 
 	//bitmapText.DrawString(wnd.mouse.GetPosX(),wnd.mouse.GetPosY(), Colors::Blue, "Weeeeee", BitmapText::Font::FixedSys16x28);
-	//gfx.DrawRectFilled({ {200,250},50,125 }, Colors::Blue);
-	//gfx.DrawRectFilled({ {300,250},50,125 }, Colors::Red);
-	//gfx.DrawRectFilled({ {400,250},50,125 }, Colors::Yellow);
-	//gfx.DrawRectFilled({ {500,250},50,125 }, Colors::Green);
-	//gfx.DrawRectFilled({ {600,250},50,125 }, Colors::LightGray);
-	//mf1->character->Draw(gfx);
-	//mf2->character->Draw(gfx);
-	//mf3->character->Draw(gfx);
+	gfx.DrawRectFilled({ {200,250},50,125 }, Colors::Blue);
+	gfx.DrawRectFilled({ {300,250},50,125 }, Colors::Red);
+	gfx.DrawRectFilled({ {400,250},50,125 }, Colors::Yellow);
+	gfx.DrawRectFilled({ {500,250},50,125 }, Colors::Green);
+	gfx.DrawRectFilled({ {600,250},50,125 }, Colors::LightGray);
+	mf1->character->Draw(gfx);
+	mf2->character->Draw(gfx);
+	mf3->character->Draw(gfx);
+	//Vei2 p1 = Vei2(mf1->character->GetPersonalSpace().left, mf1->character->GetPersonalSpace().top);
+	//Vei2 p2 = Vei2(mf2->character->GetPersonalSpace().left, mf2->character->GetPersonalSpace().top);
+	//Vei2 p3 = Vei2(mf3->character->GetPersonalSpace().left, mf3->character->GetPersonalSpace().top);
+
+
 	//attributes.Draw(gfx);
 	//attributes.TakeDamage(1);
 	//gfx.DrawLine(p1, Vei2(wnd.mouse.GetPosX(), wnd.mouse.GetPosY()), Colors::Magenta);
