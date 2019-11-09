@@ -57,6 +57,16 @@ public:
 		return Rect_(left - offset, right + offset, top - offset, bottom + offset);
 	}
 
+	Rect_ GetOverlap(const Rect_& B) const
+	{
+		return {
+			std::max(left,B.left),
+			std::min(right,B.right),
+			std::max(top,B.top),
+			std::min(bottom,B.bottom)
+		};
+	}
+
 	Vec2_<T> GetCenter() const
 	{
 		return Vec2_<T>((left + right) / 2, (top + bottom) / 2);

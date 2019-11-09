@@ -23,11 +23,11 @@ public:
 	void DrawChar(int x, int y, Color textColor, char ch, Font font);
 	void DrawString(int x, int y, Color textColor, std::string str, Font font);
 
-private:
+public:
 	Graphics& gfx;
 	std::vector<Surface> fontSpriteSheets;
 	std::vector<std::string> fontFiles = { "bitmaps\\FixedSys16x28.bmp" , "bitmaps\\Consolas13x24.bmp" };
-	std::vector<Vei2> fontSizes = { {16,28}, {8,14} , {13,24}, {6,12} };
+	std::vector<Vei2> fontSizes = { {16,28}, {8,14} , {13,24}, {5,12} };
 
 
 };
