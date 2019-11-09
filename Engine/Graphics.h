@@ -28,6 +28,58 @@
 #include "Rect.h"
 //#include <assert.h>
 #include <cassert>
+#include <algorithm>
+#include <cmath>
+
+namespace PixelStep
+{
+	struct Pair
+	{
+		Pair(Vei2 a, Vei2 b)
+			:
+			activePos(a),
+			targetPos(b)
+		{
+		}
+		float GetDistance() const
+		{
+			return sqrt((activePos.x - targetPos.x)* (activePos.x - targetPos.x) + (activePos.y - targetPos.y)* (activePos.y - targetPos.y));
+		}
+		Vei2 MidPoint() const
+		{
+			return { int((activePos.x + targetPos.x) / 2) , int((activePos.y + targetPos.y) / 2) };
+		}
+		Vei2 TakeStep()
+		{
+			float phi = 0.0f;
+			if (std::abs(targetPos.x - activePos.x) < 0.001f)
+			{
+				if ((targetPos.y - activePos.y) > 0)
+				{
+					phi = 3.14159f / 2;
+				}
+				else
+				{
+					phi = 3 / 2 * 3.14159f;
+				}
+			}
+			else if ((targetPos.x - activePos.x) < 0)
+			{
+				phi = atan((targetPos.y - activePos.y) / (targetPos.x - activePos.x)) + 3.14159f;
+			}
+			else
+			{
+				phi = atan((targetPos.y - activePos.y) / (targetPos.x - activePos.x));
+			}
+			activePos.x += cos(phi);
+			activePos.y += sin(phi);
+			return { int(activePos.x), int(activePos.y) };
+		}
+		Vec2 activePos;
+		Vec2 targetPos;
+		
+	};
+}
 
 class Graphics
 {
@@ -115,8 +167,27 @@ public:
 			}
 		}
 	}
-
-
+	void DrawLine(PixelStep::Pair pair, Color c)
+	{
+		//PixelStep::Pair pair(p1, p2);
+		Vec2 p2 = pair.targetPos;
+		Vei2 p;
+		do
+		{
+			p = pair.TakeStep();
+			PutPixel(p.x, p.y, c);
+		} while ((p.x != int(p2.x)) && (p.y != int(p2.y)));
+	}
+	void DrawLine(Vei2 p1, Vei2 p2, Color c)
+	{
+		PixelStep::Pair pair(p1, p2);
+		Vei2 p;
+		do
+		{
+			p = pair.TakeStep();
+			PutPixel(p.x, p.y, c);
+		} while ((p.x != int(p2.x)) && (p.y != int(p2.y)));
+	}
 	void DrawRect(RectI rect, Color c);
 	void DrawRectFilled(RectI rect, Color c);
 	~Graphics();
