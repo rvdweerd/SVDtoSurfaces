@@ -166,8 +166,29 @@ void Game::UpdateModel()
 	}
 }
 
+Vei2 Intersection(Vei2 p1, Vei2 p2, Vei2 p3, Vei2 p4)
+{
+	//bring to base
+	//Vei2 p1_orig = p1;
+	p2 -= p1;
+	p3 -= p1;
+	p4 -= p1;
+	//p1 -= p1;
+
+
+	float y0 = float(-p4.x * p3.y + p3.x * p4.y) / float(p3.x - p4.x);
+	float alpha = float(p3.y - p4.y) / float(p3.x - p4.x);
+	float x_ = float(y0 * p2.x) / float(p2.y - alpha * p2.x);
+	float y_ = float(y0 * p2.y) / float(p2.y - alpha * p2.x);
+
+
+
+	return ( Vei2{ int(x_) , int(y_) } + p1 );
+}
+
 void Game::ComposeFrame()
 {
+	//DRAW CHARACTERS
 	gfx.DrawSprite(0, 0, bitmapText.fontSpriteSheets[3], SpriteEffect::Copy());
 	bitmapText.DrawString(100, 130, Colors::White, "Fun Times (small font)", BitmapText::Font::Consolas6x12BROKEN);
 	if (mf1->character->GetPersonalSpace().IsOverlappingWith(mf2->character->GetPersonalSpace()))
@@ -203,16 +224,23 @@ void Game::ComposeFrame()
 	mf2->character->Draw(gfx);
 	mf3->character->Draw(gfx);
 
-	Vei2 p1 = Vei2( mf1->character->GetPersonalSpace().left, mf1->character->GetPersonalSpace().top );
-	Vei2 p2 = Vei2( mf2->character->GetPersonalSpace().left, mf2->character->GetPersonalSpace().top );
-	Vei2 p3 = Vei2( mf3->character->GetPersonalSpace().left, mf3->character->GetPersonalSpace().top );
-	//DRAW LINE
+	Vei2 p1 = Vei2(mf1->character->GetPersonalSpace().left, mf1->character->GetPersonalSpace().top);
+	Vei2 p2 = Vei2(mf2->character->GetPersonalSpace().left, mf2->character->GetPersonalSpace().top);
+	Vei2 p3 = Vei2(mf3->character->GetPersonalSpace().left, mf3->character->GetPersonalSpace().top);
 
 
-	//attributes.Draw(gfx);
-	//attributes.TakeDamage(1);
-	
-	//gfx.DrawSprite(10, 10, surf, SpriteEffect::Copy());
+	// DRAW LINES
+	Vei2 q1(10, 20);
+	Vei2 q2(wnd.mouse.GetPosX(), wnd.mouse.GetPosY());
+	Vei2 q3(30, 80);
+	Vei2 q4(140, 10);
+	PixelStep::Pair pair1(q1, q2);
+	PixelStep::Pair pair2(q3, q4);
+	gfx.DrawLine(pair1, Colors::Red);
+	gfx.DrawLine(pair2, Colors::Red);
+	Vei2 q = Intersection(q1, q2, q3, q4);
+	gfx.DrawLine(q1, q, Colors::White);
+	gfx.DrawLine(q3, q, Colors::White);
 }
 
 
