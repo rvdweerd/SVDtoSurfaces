@@ -27,7 +27,10 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	surf("bitmaps\\Dog_BMP_32_Bit.bmp")
+	//surf("bitmaps\\dib32.bmp"),
+	surf("bitmaps\\Dog_BMP_32_Bit_small.bmp"),
+	//surf("bitmaps\\link90x90.bmp"),
+    surfmat(surf)
 	/*bitmapText(gfx),
 	mf1(std::make_unique<MemeFighter>(MemeDwarf("Willy","bitmaps\\link90x90.bmp", CharacterLoads::Dwarf::Willy(), {10,100} , bitmapText))),
 	mf2(std::make_unique<MemeFighter>(MemeHuman("Laura","bitmaps\\laura.bmp", CharacterLoads::Human::Laura(), {10,200}, bitmapText))),
@@ -46,7 +49,21 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	
+
+	while (!wnd.kbd.KeyIsEmpty())
+	{
+		// get an event from the queue
+		const Keyboard::Event e = wnd.kbd.ReadKey();
+		// check if it is a release event
+		if (e.IsRelease())
+		{
+			// check if the event was for the space key
+			if (e.GetCode() == 'Q')
+			{
+				surfmat.IncreaseResolution(surf);
+			}
+		}
+	}
 }
 
 

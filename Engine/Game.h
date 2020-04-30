@@ -30,6 +30,7 @@
 #include "BitmapText.h"
 #include "Sound.h"
 #include "MemeFighter.h"
+#include "SurfaceMat.h"
 
 class Game
 {
@@ -50,6 +51,7 @@ private:
 	/********************************/
 	/*  User Variables              */
 	Surface surf;
+	SurfaceMatrix surfmat;
 	//BitmapText bitmapText;
 	//FrameTimer ft;
 	//std::unique_ptr<MemeFighter> mf1;//willy
