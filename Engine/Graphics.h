@@ -188,6 +188,17 @@ public:
 			PutPixel(p.x, p.y, c);
 		} while ((p.x != int(p2.x)) && (p.y != int(p2.y)));
 	}
+	void DrawLine(std::vector<Vei2> polygon, Color c)
+	{
+		polygon.emplace_back(polygon[0]);
+		size_t n = polygon.size(); 
+		for (size_t i = 0; i < n-size_t(1); i++)
+		{
+			DrawLine(polygon[i], polygon[i+size_t(1)], c);
+		}
+	}
+
+	void DrawRect(RectI rect, RectI clip, Color c);
 	void DrawRect(RectI rect, Color c);
 	void DrawRectFilled(RectI rect, Color c);
 	~Graphics();
@@ -206,8 +217,8 @@ private:
 	D3D11_MAPPED_SUBRESOURCE							mappedSysBufferTexture;
 	Color*                                              pSysBuffer = nullptr;
 public:
-	static constexpr int ScreenWidth = 800;
-	static constexpr int ScreenHeight = 600;
+	static constexpr int ScreenWidth = 1800;
+	static constexpr int ScreenHeight = 1600;
 	static RectI GetScreenRect();
 	
 	

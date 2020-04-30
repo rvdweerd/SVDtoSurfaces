@@ -80,11 +80,11 @@ void Character::Draw(Graphics& gfx)
 	attributes.Draw(Vei2(pos)+pos2topLeft,gfx);
 	if (active)
 	{
-		gfx.DrawRect(GetPersonalSpace(), Colors::Red);
+		//gfx.DrawRect(GetPersonalSpace(), Colors::Red);
 	}
 	else
 	{
-		gfx.DrawRect(GetPersonalSpace(), Colors::Blue);
+		//gfx.DrawRect(GetPersonalSpace(), Colors::Blue);
 	}
 	
 }

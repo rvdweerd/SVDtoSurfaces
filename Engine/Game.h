@@ -50,11 +50,11 @@ private:
 	/********************************/
 	/*  User Variables              */
 	Surface surf;
-	BitmapText bitmapText;
-	FrameTimer ft;
-	std::unique_ptr<MemeFighter> mf1;//willy
-	std::unique_ptr<MemeFighter> mf2;//laura
-	std::unique_ptr<MemeFighter> mf3;//umisan
-	Sound soundHit;
+	//BitmapText bitmapText;
+	//FrameTimer ft;
+	//std::unique_ptr<MemeFighter> mf1;//willy
+	//std::unique_ptr<MemeFighter> mf2;//laura
+	//std::unique_ptr<MemeFighter> mf3;//umisan
+	//Sound soundHit;
 	/********************************/
 };

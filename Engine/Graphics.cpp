@@ -327,9 +327,29 @@ const Color Graphics::GetPixel (const int x, const int y) const
 }
 
 
+void Graphics::DrawRect(RectI rect, RectI clip, Color c)
+{
+	const int x_left = std::min(clip.right- 1, std::max(clip.left, rect.left));
+	const int x_right = std::max(clip.left, std::min(clip.right-1, rect.right));
+	const int y_top = std::min(clip.bottom-1, std::max(clip.top, rect.top));
+	const int y_bottom = std::max(clip.top, std::min(clip.bottom-1 , rect.bottom));
+
+	for (int i = x_left; i < x_right; i++)
+	{
+		PutPixel(i, y_top, c);
+		PutPixel(i, y_bottom, c);
+	}
+	for (int j = y_top; j < y_bottom; j++)
+	{
+		PutPixel(x_left, j, c);
+		PutPixel(x_right, j, c);
+	}
+}
+
 void Graphics::DrawRect(RectI rect, Color c)
 {
-	const int x_left = std::min(Graphics::ScreenWidth-1,std::max(0, rect.left));
+	DrawRect(rect, { {0,0},Graphics::ScreenWidth,Graphics::ScreenHeight }, c);
+	/*const int x_left = std::min(Graphics::ScreenWidth - 1, std::max(0, rect.left));
 	const int x_right = std::max(0,std::min(Graphics::ScreenWidth-1, rect.right));
 	const int y_top = std::min(Graphics::ScreenHeight-1, std::max(0, rect.top));
 	const int y_bottom = std::max(0,std::min(Graphics::ScreenHeight-1, rect.bottom));
@@ -343,7 +363,7 @@ void Graphics::DrawRect(RectI rect, Color c)
 	{
 		PutPixel(x_left, j, c);
 		PutPixel(x_right, j, c);
-	}
+	}*/
 }
 
 void Graphics::DrawRectFilled(RectI rect, Color c)

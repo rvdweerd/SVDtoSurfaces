@@ -159,6 +159,7 @@
     <ClInclude Include="SoundEffect.h" />
     <ClInclude Include="SpriteEffect.h" />
     <ClInclude Include="Surface.h" />
+    <ClInclude Include="SurfaceMat.h" />
     <ClInclude Include="Vec2.h" />
   </ItemGroup>
   <ItemGroup>
