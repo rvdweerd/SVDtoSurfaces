@@ -51,8 +51,9 @@ private:
 	/********************************/
 	/*  User Variables              */
 	Surface surf;
+	Surface surf_orig;
 	SurfaceMatrix surfmat;
-	//BitmapText bitmapText;
+	BitmapText bitmapText;
 	//FrameTimer ft;
 	//std::unique_ptr<MemeFighter> mf1;//willy
 	//std::unique_ptr<MemeFighter> mf2;//laura
