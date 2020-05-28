@@ -516,6 +516,8 @@
     <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="bitmaps\Dog_BMP_32_Bit_small.bmp" />
+    <Image Include="bitmaps\jump24_small.bmp" />
     <Image Include="Chili.ico" />
   </ItemGroup>
   <ItemGroup>

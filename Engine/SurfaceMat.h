@@ -7,11 +7,16 @@ using namespace Eigen;
 class SurfaceMatrix
 {
     //MatrixXf A;
-    size_t maxres = 64;
-    size_t curres = 0;
-    std::vector<MatrixXf> Mvec;
 public:
-    SurfaceMatrix(Surface& surf)
+    size_t maxres = 64;
+    size_t curres = 1;
+    std::vector<MatrixXf> Mvec;
+    int UcolSize=0;
+    int UrowSize=0;
+    int VcolSize = 0;
+    int VrowSize = 0;
+public:
+    SurfaceMatrix(Surface& surf, Surface& surf_orig)
     {   
         //surf.Clip();
         //surf.Scale(2.f);
@@ -26,19 +31,28 @@ public:
                 auto b = surf.GetPixel(x, y).GetB();
                 float avg = (r + g + b) / 3.0f;
                 A(y, x) = avg;
+
+                Color c;
+                c.SetR((unsigned  int)A(y, x) + 1);
+                c.SetG((unsigned  int)A(y, x) + 1);
+                c.SetB((unsigned  int)A(y, x) + 1);
+                surf_orig.PutPixel(x, y, c);
                 //A(y, x) = surf.GetPixel(x, y).GetR();
             }
         }
         JacobiSVD<MatrixXf> svd(A, ComputeThinU | ComputeThinV);
         
-        
+        UrowSize = svd.matrixU().rows();
+        UcolSize = svd.matrixU().cols();
+        VrowSize = svd.matrixV().rows();
+        VcolSize = svd.matrixV().cols();
         Mvec.push_back(svd.matrixU().col(0)* svd.matrixV().col(0).transpose()* svd.singularValues()(0));
         for (int i = 1; i < maxres; i++)
         {
             Mvec.push_back(Mvec[i - 1] + svd.matrixU().col(i) * svd.matrixV().col(i).transpose() * svd.singularValues()(i));
         }
         
-        A = Mvec[curres];
+        A = Mvec[curres-1];
         for (size_t y = 0; y < surf.GetHeight(); y++)
         {
             for (size_t x = 0; x < surf.GetWidth(); x++)

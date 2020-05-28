@@ -29,10 +29,12 @@ Game::Game(MainWindow& wnd)
 	gfx(wnd),
 	//surf("bitmaps\\dib32.bmp"),
 	surf("bitmaps\\Dog_BMP_32_Bit_small.bmp"),
+	surf_orig("bitmaps\\Dog_BMP_32_Bit_small.bmp"),
+	//surf("bitmaps\\jump24_small.bmp"),
 	//surf("bitmaps\\link90x90.bmp"),
-    surfmat(surf)
-	/*bitmapText(gfx),
-	mf1(std::make_unique<MemeFighter>(MemeDwarf("Willy","bitmaps\\link90x90.bmp", CharacterLoads::Dwarf::Willy(), {10,100} , bitmapText))),
+    surfmat(surf,surf_orig),
+	bitmapText(gfx)
+	/*mf1(std::make_unique<MemeFighter>(MemeDwarf("Willy","bitmaps\\link90x90.bmp", CharacterLoads::Dwarf::Willy(), {10,100} , bitmapText))),
 	mf2(std::make_unique<MemeFighter>(MemeHuman("Laura","bitmaps\\laura.bmp", CharacterLoads::Human::Laura(), {10,200}, bitmapText))),
 	mf3(std::make_unique<MemeFighter>(MemeHuman("Umisan","bitmaps\\umisan.bmp", CharacterLoads::Human::Umisan(), {10,400}, bitmapText))),
 	soundHit(L"sounds\\hit.wav")*/
@@ -69,10 +71,32 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
-	
 	gfx.DrawSprite(0, 0, surf, SpriteEffect::Copy());
+	gfx.DrawSprite(0, 600, surf_orig, SpriteEffect::Copy());
 	
+	std::string str1 = "Rank of composite matrix: ";
+	str1.append(std::to_string(surfmat.curres));
+	
+	std::string str2 = "U (" + std::to_string(surfmat.UrowSize) + "," + std::to_string(surfmat.UcolSize) + "), ";
+	str2 = str2 + "V (" + std::to_string(surfmat.VrowSize) + "," + std::to_string(surfmat.VcolSize) + ")";
 
+	std::string str3 = "Each rank increase costs (" + std::to_string(surfmat.UcolSize) + " x " + std::to_string(surfmat.UcolSize) + ") pixels x 4 bytes / pixel = 5.4 kB";
+	
+	float memsize = surfmat.curres * (surfmat.UcolSize + surfmat.VrowSize) * 4 / 1000; // kB
+	std::string str4 = "Compressed image size: " + std::to_string((int)memsize) + " kB" ;
+
+	int rate = int((1.0f - memsize / 1805.328f) * 100.0f);
+	std::string str5 = "Compression rate: " + std::to_string(rate) + "%";
+
+	int i = 18;
+	bitmapText.DrawString(10, 10, Colors::White, str1, BitmapText::Font::FixedSys8x14);
+	bitmapText.DrawString(10, 10 + 1 * i, Colors::White, str2, BitmapText::Font::FixedSys8x14);
+	bitmapText.DrawString(10, 10 + 2 * i, Colors::White, str3, BitmapText::Font::FixedSys8x14);
+	bitmapText.DrawString(10, 10 + 3 * i, Colors::White, str4, BitmapText::Font::FixedSys8x14);
+	bitmapText.DrawString(10, 10 + 4 * i, Colors::White, str5, BitmapText::Font::FixedSys8x14);
+
+	std::string str6 = "Original file size: " + std::to_string(1805) + "kB";
+	bitmapText.DrawString(10, 610, Colors::White, str6, BitmapText::Font::FixedSys8x14);
 }
 
 

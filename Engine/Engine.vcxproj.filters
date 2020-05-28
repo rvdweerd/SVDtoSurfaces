@@ -971,6 +971,12 @@
     <Image Include="Chili.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="bitmaps\jump24_small.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="bitmaps\Dog_BMP_32_Bit_small.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
