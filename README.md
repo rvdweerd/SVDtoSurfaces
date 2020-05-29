@@ -19,8 +19,26 @@ The essence of the code is in "SurfaceMat.h" (Surface is the type that holds the
 ```cpp
 SurfaceMatrix(Surface& surf)
 {
+    // Define A using Eigen matrix type for floats
     MatrixXf A(surf.GetHeight(), surf.GetWidth());
+    
+    // Fill Matrix with image information (convert RGB to GreyColor)
+    for (size_t y = 0; y < surf.GetHeight(); y++)
+    {
+        for (size_t x = 0; x < surf.GetWidth(); x++)
+        {
+            auto r = surf.GetPixel(x, y).GetR();
+            auto g = surf.GetPixel(x, y).GetG();
+            auto b = surf.GetPixel(x, y).GetB();
+            float avg = (r + g + b) / 3.0f;
+            A(y, x) = avg;
+        }
+    }
+    
+    // Perform SVD decomposition
     JacobiSVD<MatrixXf> svd(A, ComputeThinU | ComputeThinV);
+    
+    // Fill the vector Mvec (class data member) with composite matrices with increasing rank
     Mvec.push_back(svd.matrixU().col(0)* svd.matrixV().col(0).transpose()* svd.singularValues()(0));
     for (int i = 1; i < maxResolution; i++)
     {
