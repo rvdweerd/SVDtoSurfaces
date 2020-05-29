@@ -12,7 +12,7 @@ Demo:
 * Visualizes the increase in rank r (i.e. how many singular values are used to build the compressed image matrix)
 * The composite matrix is the sum over r of: r'th left singular vector * r'th singular value * r'th right singular vector
 
-![demo](svd_dog_demo.gif)
+![demo](svd_dog_demo#.gif)
 
 Note:
 The essence of the code is in "SurfaceMat.h" (Surface is the type that holds the original sprite):
