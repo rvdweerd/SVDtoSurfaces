@@ -1,5 +1,5 @@
 # SVDtoSurfaces
-Applying SVD to bitmap surfaces (experimenting with compression)
+Applying Singular Value Decomposition to bitmap images (experimenting with compression)
 * Loads a bitmap image into an image matrix
 * Applies SVD
 * Lets user choose the amount of singular values to be included in the compressed image
